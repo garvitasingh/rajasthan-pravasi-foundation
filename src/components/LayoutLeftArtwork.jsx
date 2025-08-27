@@ -9,12 +9,20 @@ export default function LayoutLeftArtwork({ children, showProgress }) {
       {/* Left */}
       <div className="w-full lg:w-1/2 relative flex flex-col items-center bg-white px-6 md:px-12 py-10 overflow-hidden">
         {/* faint mandala */}
-        <img
+         <img
           src={mandala}
           alt=""
           aria-hidden
-          className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 opacity-10"
-          style={{ width: "60%", objectFit: "cover", objectPosition: "right" }}
+          className="pointer-events-none select-none absolute left-0 top-0 h-full opacity-5"
+          style={{
+            width: "100%",
+            objectFit: "cover",
+            objectPosition: "right",
+            left: "-40%",
+            top: 0,
+            transform: "none",
+            clipPath: "inset(0 0 0 40%)"
+          }}
         />
         <div className="w-full max-w-md z-10">
           <img src={logo} alt="Rajasthan Pravasi Foundation" className="w-56 mb-8" />

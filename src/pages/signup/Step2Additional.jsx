@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LayoutLeftArtwork from "../../components/LayoutLeftArtwork";
 import ProgressTabs from "../../components/ProgressTabs";
-import { SelectInput, TextInput } from "../../components/Inputs";
+import { SelectInput, TextInput } from "../../dashboard/components/Inputs";
 import userPreview from "../../assets/user-preview.png"; // optional placeholder
 
 export default function Step2Additional() {
   const nav = useNavigate();
   const [form, setForm] = useState({
     bloodGroupEn: "B+",
-    bloodGroupHi: "बी+",
+    bloodGroupHi: "बी+", 
     occupation: "Private Employee",
-    company: "",
+    company: "", 
     designation: "Sales Head",
     photoFile: null 
   });

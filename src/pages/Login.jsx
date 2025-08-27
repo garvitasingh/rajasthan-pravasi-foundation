@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LayoutLeftArtwork from "../components/LayoutLeftArtwork";
-import { TextInput } from "../components/Inputs";
+import {  TextInput } from "../dashboard/components/Inputs";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });

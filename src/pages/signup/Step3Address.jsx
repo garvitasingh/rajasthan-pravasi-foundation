@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LayoutLeftArtwork from "../../components/LayoutLeftArtwork";
 import ProgressTabs from "../../components/ProgressTabs";
-import { TextInput } from "../../components/Inputs";
+import {TextInput } from "../../dashboard/components/Inputs";
 
 export default function Step3Address() {
   const nav = useNavigate();
   const [form, setForm] = useState({
     currentEn: "",
-    currentHi: "",
+    currentHi: "", 
     permanentEn: "",
     permanentHi: ""
   });
