@@ -7,13 +7,14 @@ export default function ProfileCard() {
     <div className="rounded-xl border bg-white overflow-hidden">
       <div className="relative p-5 bg-gradient-to-r from-[#96469C] via-blue-900 to-black">
         <div className="absolute inset-0 opacity-40" />
-        <div className="relative flex items-center gap-3">
-          <img src={logo} alt="" className="h-10 w-10 rounded bg-white p-1" />
+  
+        <div className="relative mt-5 rounded-lg bg-white/95 p-4 text-xs">
+         <div className="relative flex items-center gap-2">
+          <img src={logo} alt="" className="h-10 w-15 rounded bg-white p-2" />
           <div className="ml-auto">
             <img src={avatar} alt="" className="h-12 w-12 rounded-md object-cover" />
           </div>
         </div>
-        <div className="relative mt-4 rounded-lg bg-white/95 p-3 text-xs">
           <p className="font-semibold">PR00001</p>
           <div className="mt-1 grid grid-cols-2 gap-3">
             <div>
@@ -26,12 +27,12 @@ export default function ProfileCard() {
             </div>
           </div>
         </div>
-        
+         
+      </div> 
+      <div className="mt-3 flex justify-center gap-2 px-4">
+        <button className="rounded-md bg-[#96469C] text-white px-3 py-1 text-sm">Front</button>
+        <button className="rounded-md bg-white text-gray-700 px-3 py-1 text-sm border border-gray-300">Back</button>
       </div>
-<div className="mt-3 flex gap-2 center px-4">
-          <button className="rounded-md bg-[#96469C] text-white px-3 py-1 text-sm">Front</button>
-          <button className="rounded-md bg-white text-gray-700 px-3 py-1 text-sm">Back</button>
-        </div>
       {/* details */}
       <div className="p-4 text-sm leading-5">
         <Section title="Personal Details">
