@@ -7,7 +7,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { label: "Home", path: "/" },
+    { label: "Home", path: "/home" },
     { label: "About Us", path: "/about" },
     { label: "Gallery", path: "/gallery" },
     { label: "Contact", path: "/contact" },
@@ -27,7 +27,7 @@ export default function Navbar() {
 
       {/* Nav Links */}
       <div className="hidden md:flex items-center gap-6">
-        {navItems.map((item) => (
+        {navItems.map((item) => ( 
           <Link
             key={item.label}
             to={item.path}
@@ -44,7 +44,8 @@ export default function Navbar() {
         {/* LOGIN Button */}
         <Link
           to="/login"
-          className="btn-login ml-4 flex items-center justify-center"
+          key='login'
+          className="btn-login ml-4 flex items-center justify-center z-40"
           style={{
             width: "100px",
             height: "40px",
@@ -59,7 +60,8 @@ export default function Navbar() {
           width="100px"
           height="40px"
           borderRadius="20px"
-          className="ml-3"
+          className="ml-3 z-40" 
+          onClick={() => { window.location.href = "/signup"; }}
         >
           JOIN US
         </GradientButton>

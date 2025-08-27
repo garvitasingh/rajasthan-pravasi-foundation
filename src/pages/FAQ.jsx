@@ -6,7 +6,7 @@ import FaqContent from "../components/FaqContent";
 
 export default function FAQ() {
   return (
-    <PageLayout bgImage={bgImage}>
+    <PageLayout bgImage={bgImage} >
       <FaqContent />
     </PageLayout>
   );

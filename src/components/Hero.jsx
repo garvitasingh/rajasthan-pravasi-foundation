@@ -9,6 +9,10 @@ import GradientButton from "./GradientButton";
  * - GET STARTED uses the exact gradient and glow via .btn-gradient
  */
 export default function Hero() {
+  const handleClick = () => {
+    window.location.pathname = "/home";
+  };
+
   return (
     <section className="w-full text-center px-6 hero-content-max">
       {/* Container limits width for better typographic control */}
@@ -44,6 +48,7 @@ export default function Hero() {
             width="254px"
             height="68px"
             borderRadius="2px 30px 2px 30px"
+            onClick={handleClick}
           >
             <h4 style={{ lineHeight: 1, fontWeight: 600, fontSize: "20px" }}>
               GET STARTED
@@ -54,3 +59,4 @@ export default function Hero() {
     </section>
   );
 }
+  

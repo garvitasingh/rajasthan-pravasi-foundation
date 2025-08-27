@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-export default function PageLayout({ bgImage, children }) {
+export default function PageLayout({ bgImage, children, fullWidth = false }) {
   const [offsetY, setOffsetY] = useState(0);
 
   useEffect(() => {
@@ -28,11 +28,19 @@ export default function PageLayout({ bgImage, children }) {
       </div>
 
       {/* Page Content */}
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        {children}
-      </div>
+      {fullWidth ? (
+        // Full width content with 30px horizontal padding
+        <div className="w-full px-[30px]">
+          {children}
+        </div>
+      ) : (
+        // Regular constrained content
+        <div className="max-w-5xl mx-auto px-4 py-12">
+          {children}
+        </div>
+      )}
 
       <Footer />
     </div>
   );
-}
+} 

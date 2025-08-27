@@ -5,7 +5,7 @@ import GalleryContent from "../components/GalleryContent";
 
 export default function Gallery() {
   return (
-    <PageLayout bgImage={bgImage}>
+    <PageLayout bgImage={bgImage} fullWidth={true}>
       <GalleryContent />
     </PageLayout>
   );

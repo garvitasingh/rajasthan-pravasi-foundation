@@ -9,7 +9,7 @@ import GradientButton from "../components/GradientButton";
 
 export default function Contact() {
   return (  
-        <PageLayout bgImage={bgImage}>
+        <PageLayout bgImage={bgImage} >
 
     <div className="justify-center items-center py-3 px-2">
         <h2 className="text-center text-3xl font-bold text-orange-600 mb-8">
