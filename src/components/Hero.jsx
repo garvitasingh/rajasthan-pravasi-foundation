@@ -1,62 +1,60 @@
 import React from "react";
 import GradientButton from "./GradientButton";
+import { motion } from "framer-motion";
 
-/**
- * Hero.jsx
- * - Centered hero with two script lines
- * - "Welcome to" uses Italianno as you requested
- * - The large title uses the same Italianno script for cohesion
- * - GET STARTED uses the exact gradient and glow via .btn-gradient
- */
 export default function Hero() {
   const handleClick = () => {
     window.location.pathname = "/home";
   };
 
   return (
-    <section className="w-full text-center px-6 hero-content-max">
-      {/* Container limits width for better typographic control */}
-      <div className="max-w-5xl mx-auto">
-        {/* "Welcome to" - Italianno font, italic look (size tuned) */}
-        <div className="mt-12">
-          <h2
-            className="font-italianno hero-script text-white text-4xl sm:text-5xl md:text-6xl"
-            style={{ lineHeight: 1, fontWeight: 400, fontSize: "96px" }}
-          >
-            Welcome to
-          </h2>
-        </div>
+    <section className="relative w-full min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+      {/* Background image - already applied from parent CSS (hero-content-max) */}
+      <div className="absolute inset-0 bg-black/50" />{" "}
+      {/* Overlay for readability */}
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* "Welcome to" animated */}
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="font-italianno text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+          style={{ lineHeight: 1, fontWeight: 400 }}
+        >
+          Welcome to
+        </motion.h2>
 
-        {/* Main title - big script style */}
-        <div className="mt-4">
-          <h1
-            className="font-italianno hero-script text-white text-5xl sm:text-6xl md:text-[88px] lg:text-[110px] leading-tight"
-            style={{
-              letterSpacing: "0px",
-              lineHeight: 1,
-              fontWeight: 400,
-              fontSize: "96px",
-            }}
-          >
-            Rajasthan Pravasi Foundation
-          </h1>
-        </div>
- 
-        {/* CTA */}
-        <div className="mt-10 flex items-center justify-center">
+        {/* Main title animated */}
+        <motion.h1
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="font-italianno text-white mt-4 text-5xl sm:text-6xl md:text-[88px] lg:text-[110px] leading-tight drop-shadow-lg"
+          style={{ fontWeight: 400 }}
+        >
+          Rajasthan Pravasi Foundation
+        </motion.h1>
+
+        {/* CTA Button animated */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="mt-12 flex justify-center"
+        >
           <GradientButton
-            width="254px"
-            height="68px"
+            width="260px"
+            height="72px"
             borderRadius="2px 30px 2px 30px"
             onClick={handleClick}
           >
-            <h4 style={{ lineHeight: 1, fontWeight: 600, fontSize: "20px" }}>
+            <span className="text-lg font-semibold tracking-wide">
               GET STARTED
-            </h4>
+            </span>
           </GradientButton>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
-  

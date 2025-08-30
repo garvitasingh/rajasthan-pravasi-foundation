@@ -9,7 +9,7 @@ export default function LayoutLeftArtwork({ children, showProgress }) {
       {/* Left */}
       <div className="w-full lg:w-1/2 relative flex flex-col items-center bg-white px-6 md:px-12 py-10 overflow-hidden">
         {/* faint mandala */}
-         <img
+        <img
           src={mandala}
           alt=""
           aria-hidden
@@ -21,11 +21,15 @@ export default function LayoutLeftArtwork({ children, showProgress }) {
             left: "-40%",
             top: 0,
             transform: "none",
-            clipPath: "inset(0 0 0 40%)"
+            clipPath: "inset(0 0 0 40%)",
           }}
         />
         <div className="w-full max-w-md z-10">
-          <img src={logo} alt="Rajasthan Pravasi Foundation" className="w-56 mb-8" />
+          <img
+            src={logo}
+            alt="Rajasthan Pravasi Foundation"
+            className="w-56 mb-8"
+          />
           {showProgress}
           {children}
         </div>
@@ -33,7 +37,11 @@ export default function LayoutLeftArtwork({ children, showProgress }) {
 
       {/* Right */}
       <div className="hidden lg:block lg:w-1/2">
-        <img src={palace} alt="Hawa Mahal" className="h-full w-full object-cover" />
+        <img
+          src={palace}
+          alt="Hawa Mahal"
+          className="h-full w-full object-cover"
+        />
       </div>
     </div>
   );

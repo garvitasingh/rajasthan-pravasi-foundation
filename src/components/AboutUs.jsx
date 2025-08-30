@@ -1,7 +1,7 @@
 import React from "react";
 import mandala from "../assets/mandala.png";
 import tree from "../assets/tree_bg.png";
-import whoWeAre from "../assets/about.png"; // 👈 your NGO image
+import whoWeAre from "../assets/about.png";
 
 export default function AboutUs() {
   return (
@@ -14,18 +14,13 @@ export default function AboutUs() {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-[1220px] mx-auto">
-        <div className="flex-1 text-center px-6 md:px-12">
-          <h2
-            className="text-orange-500 mb-6"
-            style={{
-              fontWeight: 700,
-              fontSize: "40px",
-            }}
-          >
+      <div className="relative z-10 max-w-[1220px] mx-auto px-6 md:px-12">
+        {/* About Us Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-orange-600 text-4xl md:text-5xl font-extrabold mb-6 tracking-wide drop-shadow-sm">
             About Us
           </h2>
-          <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
+          <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins max-w-3xl mx-auto">
             Pravasi Rajasthan is a community-driven initiative aimed at helping
             Rajasthani families living across India. We understand the emotional
             and financial burden that comes with the loss of a loved one,
@@ -39,32 +34,35 @@ export default function AboutUs() {
             among Rajasthani families spread across India.
           </p>
         </div>
-        {/* Row Layout: Left Tree | Title + Desc | Right Tree */}
+
+        {/* Row Layout: Left Tree | Who we are | Right Tree */}
         <div className="flex items-center justify-between relative">
           {/* Left Tree */}
           <img
             src={tree}
             alt="Left Tree"
-            className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain"
+            className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain opacity-80"
           />
+
+          {/* Who We Are Text */}
           <div className="flex-1 text-center px-6 md:px-12">
-                    <div style={{ height: "100px" }} /> 
+            <div className="h-[80px]" />
             <h2
               className="text-orange-500 mb-6"
               style={{
                 fontFamily: "Italianno, cursive",
                 fontWeight: 400,
-                fontSize: "60px",
+                fontSize: "64px",
               }}
             >
               Who we are
             </h2>
-            <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
+            <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins max-w-3xl mx-auto">
               Color theory influences user emotions and brand perception. Data
               visualization helps users understand complex information. Design
               thinking fosters innovation through user-centered problem solving.
               A/B testing compares different design variations to optimize
-              performance. Interaction design defines.
+              performance. Interaction design defines seamless user experience.
             </p>
           </div>
 
@@ -72,17 +70,17 @@ export default function AboutUs() {
           <img
             src={tree}
             alt="Right Tree"
-            className="w-[140px] md:w-[160px] lg:w-[180px] object-contain"
+            className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain opacity-80"
           />
         </div>
 
         {/* NGO Image (Below Row) */}
-        <div className="mt-12 md:mt-16">
-          <div className="overflow-hidden rounded-[20px] shadow-xl">
+        <div className="mt-14 md:mt-20">
+          <div className="overflow-hidden rounded-[25px] shadow-xl hover:shadow-2xl transition-shadow duration-500">
             <img
               src={whoWeAre}
               alt="NGO representation"
-              className="w-full h-[500px] object-cover"
+              className="w-full h-[500px] object-cover transform hover:scale-105 transition-transform duration-700"
             />
           </div>
         </div>

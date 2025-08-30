@@ -1,10 +1,10 @@
-// src/App.jsx
 import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
@@ -26,32 +26,83 @@ import Notifications from "./dashboard/pages/Notifications";
 import Membership from "./dashboard/pages/Membership";
 import Settings from "./dashboard/pages/Settings";
 
-export default function App() {
+import { AnimatePresence } from "framer-motion";
+import PageTransition from "./components/PageTransition";
+import { Toaster } from "react-hot-toast";
+import { AppContextProvider } from "./context/AppContext";
+
+export default function AppWrapper() {
   return (
-    <Router>
-      <Routes>
-        {/* Public pages */}
+    <AppContextProvider>
+      <Router>
+        <AnimatedRoutes />
+      </Router>
+    </AppContextProvider>
+  );
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <>
+      <Toaster />
+      <Routes location={location} key={location.pathname}>
+        {/* Public pages (no transition) */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} /> 
+        <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
 
-        {/* Auth pages */}
-        <Route path="/login" element={<Login />} />
-
-        {/* Signup flow */}
+        {/* Auth pages (with transition) */}
+        <Route
+          path="/login"
+          element={
+            <AnimatePresence mode="wait">
+              <PageTransition>
+                <Login />
+              </PageTransition>
+            </AnimatePresence>
+          }
+        />
         <Route
           path="/signup"
           element={<Navigate to="/signup/step-1" replace />}
         />
-        <Route path="/signup/step-1" element={<Step1Personal />} />
-        <Route path="/signup/step-2" element={<Step2Additional />} />
-        <Route path="/signup/step-3" element={<Step3Address />} />
+        <Route
+          path="/signup/step-1"
+          element={
+            <AnimatePresence mode="wait">
+              <PageTransition>
+                <Step1Personal />
+              </PageTransition>
+            </AnimatePresence>
+          }
+        />
+        <Route
+          path="/signup/step-2"
+          element={
+            <AnimatePresence mode="wait">
+              <PageTransition>
+                <Step2Additional />
+              </PageTransition>
+            </AnimatePresence>
+          }
+        />
+        <Route
+          path="/signup/step-3"
+          element={
+            <AnimatePresence mode="wait">
+              <PageTransition>
+                <Step3Address />
+              </PageTransition>
+            </AnimatePresence>
+          }
+        />
 
-        {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/home" replace />} />
+        {/* Dashboard (no transition for layout/content) */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashHome />} />
           <Route path="chat" element={<Chat />} />
@@ -59,7 +110,10 @@ export default function App() {
           <Route path="membership" element={<Membership />} />
           <Route path="settings" element={<Settings />} />
         </Route>
+
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
-    </Router>
+    </>
   );
 }

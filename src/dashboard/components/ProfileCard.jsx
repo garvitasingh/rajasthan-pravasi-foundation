@@ -1,45 +1,54 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logo2.png";
-import avatar from "../../assets/avatar.png"; // add a placeholder
+import avatar from "../../assets/avatar.png";
+import { AppContext } from "../../context/AppContext";
 
 export default function ProfileCard() {
+  const { user, backendUrl } = useContext(AppContext);
   return (
     <div className="rounded-xl border bg-white overflow-hidden">
       <div className="relative p-5 bg-gradient-to-r from-[#96469C] via-blue-900 to-black">
         <div className="absolute inset-0 opacity-40" />
-  
+
         <div className="relative mt-5 rounded-lg bg-white/95 p-4 text-xs">
-         <div className="relative flex items-center gap-2">
-          <img src={logo} alt="" className="h-10 w-15 rounded bg-white p-2" />
-          <div className="ml-auto">
-            <img src={avatar} alt="" className="h-12 w-12 rounded-md object-cover" />
+          <div className="relative flex items-center gap-2">
+            <img src={logo} alt="" className="h-10 w-15 rounded bg-white p-2" />
+            <div className="ml-auto">
+              <img
+                src={user?.photoUrl ? `${backendUrl}${user?.photoUrl}` : avatar}
+                alt="profile"
+                className="h-12 w-12 rounded-md object-cover"
+              />
+            </div>
           </div>
-        </div>
           <p className="font-semibold">PR00001</p>
           <div className="mt-1 grid grid-cols-2 gap-3">
             <div>
               <p className="text-[11px] text-gray-500">NAME</p>
-              <p className="text-sm font-semibold">AJAY RAJ</p>
+              <p className="text-sm font-semibold">{user?.nameEn}</p>
             </div>
             <div>
               <p className="text-[11px] text-gray-500">Blood Group</p>
-              <p className="text-sm font-semibold">B+</p>
+              <p className="text-sm font-semibold">{user?.bloodGroupEn}</p>
             </div>
           </div>
         </div>
-         
-      </div> 
+      </div>
       <div className="mt-3 flex justify-center gap-2 px-4">
-        <button className="rounded-md bg-[#96469C] text-white px-3 py-1 text-sm">Front</button>
-        <button className="rounded-md bg-white text-gray-700 px-3 py-1 text-sm border border-gray-300">Back</button>
+        <button className="rounded-md bg-[#96469C] text-white px-3 py-1 text-sm">
+          Front
+        </button>
+        <button className="rounded-md bg-white text-gray-700 px-3 py-1 text-sm border border-gray-300">
+          Back
+        </button>
       </div>
       {/* details */}
       <div className="p-4 text-sm leading-5">
         <Section title="Personal Details">
-          <Row k="Name" v="Ajay Raj" />
-          <Row k="Email" v="ajay123@gmail.com" />
-          <Row k="Contact no" v="+91-9999999999" />
-          <Row k="Blood Group" v="B+" />
+          <Row k="Name" v={user?.nameEn} />
+          <Row k="Email" v={user?.email} />
+          <Row k="Contact no" v={user?.phone} />
+          <Row k="Blood Group" v={user?.bloodGroupEn} />
         </Section>
 
         {/* <Section title="Aadhar Details">
@@ -47,13 +56,13 @@ export default function ProfileCard() {
         </Section> */}
 
         <Section title="Address">
-          <Row k="Permanent" v="Flat No. 203, Shree Ganesham Residency..." />
-          <Row k="Current" v="D-45, 2nd Floor, Ardee City, Sector 52..." />
+          <Row k="Permanent" v={user?.addressPermanentEn} />
+          <Row k="Current" v={user?.addressCurrentEn} />
         </Section>
 
         <Section title="Organization">
-          <Row k="Organization" v="Labsandcode" />
-          <Row k="Job Title" v="Sales Head" />
+          <Row k="Organization" v={user?.occupationCompanyEn} />
+          <Row k="Job Title" v={user?.occupationDesignationEn} />
           <Row k="Experience" v="15+ years" />
         </Section>
 
@@ -81,4 +90,3 @@ function Row({ k, v }) {
     </div>
   );
 }
- 

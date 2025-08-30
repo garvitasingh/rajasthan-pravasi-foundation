@@ -1,16 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.button-bg {
+  background: conic-gradient(
+    from 0deg,
+    #00f5ff,
+    #000,
+    #000,
+    #00f5ff,
+    #000,
+    #000,
+    #000,
+    #00f5ff
+  );
+  background-size: 300% 300%;
+}
+
+.animate-gradient {
+  animation: gradient-move 10s ease infinite;
+}
 
 /* The exact gradient given by you (used for GET STARTED and JOIN US) */
 :root {
   --primary-gradient: linear-gradient(
     90deg,
-    #A328F9 0%,
-    #F313F7 30.71%, 
-    #FF9AB1 64.46%,
-    #FFC92E 100%
+    #a328f9 0%,
+    #f313f7 30.71%,
+    #ff9ab1 64.46%,
+    #ffc92e 100%
   );
 }
 
@@ -23,25 +53,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 14px 36px; */ 
+  /* padding: 14px 36px; */
   font-weight: 600;
-  box-shadow:
-    0 12px 40px rgba(163, 40, 249, 0.25), /* purple glow */
-    0 6px 20px rgba(255, 201, 46, 0.12);  /* yellow tint */
-  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: 0 12px 40px rgba(163, 40, 249, 0.25),
+    /* purple glow */ 0 6px 20px rgba(255, 201, 46, 0.12); /* yellow tint */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 /* hover effect */
 .btn-gradient:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 20px 60px rgba(163, 40, 249, 0.28),
+  box-shadow: 0 20px 60px rgba(163, 40, 249, 0.28),
     0 10px 30px rgba(255, 201, 46, 0.14);
 }
 
 /* login button color (solid orange) */
 .btn-login {
-  background-color: #EF5C10;
+  background-color: #ef5c10;
   color: white;
   padding: 10px 18px;
   border-radius: 999px;
@@ -50,19 +78,18 @@
 
 /* Bottom image overlay to darken the lower portion of the hero image */
 .hero-overlay-bottom {
-background: linear-gradient(
+  background: linear-gradient(
     180deg,
     rgba(16, 16, 16, 0) 0%,
     rgba(16, 16, 16, 0.7) 55%,
     #101010 100%
-  );}
+  );
+}
 
 /* script white text outline/shadow for better visibility — subtle */
 .hero-script {
   /* use Italianno via Tailwind font family; add small shadow & subtle stroke */
-  text-shadow:
-    0 2px 0 rgba(0,0,0,0.45),
-    0 6px 20px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45), 0 6px 20px rgba(0, 0, 0, 0.45);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -84,7 +111,7 @@ background: linear-gradient(
   position: relative;
   width: 980px;
   height: 980px;
-  background-image: url('mandala.png'); /* path to your image */
+  background-image: url("mandala.png"); /* path to your image */
   background-repeat: no-repeat;
   background-size: contain; /* keeps the mandala intact */
   background-position: center; /* centers it perfectly */

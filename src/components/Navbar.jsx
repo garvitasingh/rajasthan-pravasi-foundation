@@ -1,71 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
+import { motion, AnimatePresence } from "framer-motion";
+import { Home, Info, Image, Phone, HelpCircle } from "lucide-react"; // 👈 icons import
 import GradientButton from "./GradientButton";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const panelRef = useRef(null);
 
   const navItems = [
-    { label: "Home", path: "/home" },
-    { label: "About Us", path: "/about" },
-    { label: "Gallery", path: "/gallery" },
-    { label: "Contact", path: "/contact" },
-    { label: "FAQ", path: "/faq" },
+    { label: "Home", path: "/home", icon: <Home size={18} /> },
+    { label: "About Us", path: "/about", icon: <Info size={18} /> },
+    { label: "Gallery", path: "/gallery", icon: <Image size={18} /> },
+    { label: "Contact", path: "/contact", icon: <Phone size={18} /> },
+    { label: "FAQ", path: "/faq", icon: <HelpCircle size={18} /> },
   ];
 
-  // Close the mobile menu when route changes
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
-
-  // Close on outside click / Esc
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    const onClick = (e) => {
-      if (!panelRef.current) return;
-      if (!panelRef.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("keydown", onDown);
-    document.addEventListener("mousedown", onClick);
-    return () => {
-      document.removeEventListener("keydown", onDown);
-      document.removeEventListener("mousedown", onClick);
-    };
-  }, [open]);
-
   const linkCls = (path) =>
-    `transition-opacity duration-200 ${
+    `relative flex items-center gap-2 pb-1 transition-colors duration-200 ${
       location.pathname === path
-        ? "underline underline-offset-4"
-        : "opacity-95 hover:opacity-80"
+        ? "text-[#96469C] font-semibold md:after:content-[''] md:after:absolute md:after:left-0 md:after:bottom-0 md:after:w-full md:after:h-[2px] md:after:bg-white md:after:rounded-full"
+        : "opacity-90 hover:opacity-100"
     }`;
 
   return (
-    <nav className="w-full px-6 md:px-12 py-4 flex items-center justify-between z-20 relative">
+    <nav className="w-full px-6 md:px-12 py-4 flex items-center justify-between z-30 relative">
       {/* Logo */}
-      <Link to="/" className="flex items-center gap-2">
-        <img src={logo} alt="Rajasthan Pravasi Logo" className="h-12 object-contain" />
+      <Link to="/" className="flex items-center gap-2 active:scale-105">
+        <img
+          src={logo}
+          alt="Rajasthan Pravasi Logo"
+          className="h-12 object-contain"
+        />
       </Link>
 
       {/* Desktop nav */}
       <div className="hidden md:flex items-center gap-6">
         {navItems.map((item) => (
-          <Link key={item.label} to={item.path} className={`text-white ${linkCls(item.path)}`}>
-            {item.label}
+          <Link
+            key={item.label}
+            to={item.path}
+            className={`text-white ${linkCls(
+              item.path
+            )} flex items-center gap-2`}
+          >
+            {item.icon}
+            {/* Text flip animation */}
+            <span className="relative overflow-hidden h-6 group">
+              <span className="block group-hover:-translate-y-full transition-transform duration-300">
+                {item.label}
+              </span>
+              <span className="block absolute top-full left-0 group-hover:-translate-y-full transition-transform duration-300">
+                {item.label}
+              </span>
+            </span>
           </Link>
         ))}
 
         <Link
           to="/login"
-          key="login"
-          className="btn-login ml-2 flex items-center justify-center z-40 bg-[#96469C] text-white"
+          className="btn-login ml-2 flex items-center justify-center z-40 bg-[#96469C] text-white "
           style={{ width: 100, height: 40, borderRadius: 20 }}
         >
           LOGIN
@@ -76,13 +72,13 @@ export default function Navbar() {
           height="40px"
           borderRadius="20px"
           className="ml-2 z-40"
-          onClick={() => { window.location.href = "/signup"; }}
+          onClick={() => (window.location.href = "/signup")}
         >
           JOIN US
         </GradientButton>
       </div>
 
-      {/* Mobile: menu button */}
+      {/* Mobile:  */}
       <button
         className="md:hidden inline-flex items-center justify-center rounded-md bg-white/15 text-white p-2"
         aria-label="Open menu"
@@ -91,42 +87,75 @@ export default function Navbar() {
         {open ? <HiOutlineXMark size={24} /> : <HiOutlineBars3 size={24} />}
       </button>
 
-      {/* Mobile: dropdown panel */}
-      {open && (
-        <div
-          ref={panelRef}
-          className="absolute left-0 right-0 top-full mt-2 mx-4 rounded-lg border border-white/20 bg-white/95 text-gray-900 shadow-lg backdrop-blur md:hidden"
-        >
-          <div className="flex flex-col py-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`px-4 py-3 text-sm ${location.pathname === item.path ? "text-[#96469C] font-semibold" : "hover:bg-black/5"}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+      {/* Mobile Menu*/}
+      <AnimatePresence mode="wait">
+        {open && (
+          <>
+            <motion.div
+              key="overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+              onClick={() => setOpen(false)}
+            />
 
-            <div className="border-t my-2" />
-
-            <div className="flex items-center gap-3 px-4 pb-4">
-              <Link
-                to="/login"
-                className="flex-1 grid place-items-center rounded-full bg-[#96469C] text-white h-10"
-              >
-                LOGIN
-              </Link>
+            {/* Sidebar panel */}
+            <motion.div
+              key="sidebar"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="fixed top-0 left-0 bg-white w-64 max-w-[80%] h-full shadow-xl z-50"
+            >
+              {/* Close button  */}
               <button
-                onClick={() => (window.location.href = "/signup")}
-                className="flex-1 grid place-items-center rounded-full border border-[#96469C] text-[#96469C] h-10"
+                className="absolute top-4 right-4 text-gray-600"
+                onClick={() => setOpen(false)}
               >
-                JOIN US
+                <HiOutlineXMark size={24} />
               </button>
-            </div>
-          </div>
-        </div> 
-      )}
+
+              <div className="flex flex-col pt-16 px-6">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.path}
+                    className={`py-3 text-lg flex items-center gap-2 ${linkCls(
+                      item.path
+                    )}`}
+                    onClick={() => setOpen(false)} // 👈 smooth close on navigation
+                  >
+                    {item.icon}
+                    {item.label}
+                  </Link>
+                ))}
+
+                <div className="border-t my-4" />
+
+                {/* buttons */}
+                <Link
+                  to="/login"
+                  className="w-full grid place-items-center rounded-full bg-[#96469C] text-white h-10 mb-3"
+                  onClick={() => setOpen(false)}
+                >
+                  LOGIN
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="w-full grid place-items-center rounded-full border border-[#96469C] text-[#96469C] h-10"
+                  onClick={() => setOpen(false)}
+                >
+                  JOIN US
+                </Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
