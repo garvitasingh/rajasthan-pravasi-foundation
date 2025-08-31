@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../../assets/logo2.png";
-
-// Heroicons v2 (outline) from react-icons
+import { AppContext } from "../../context/AppContext";
 import {
   HiOutlineSquares2X2,
   HiOutlineChatBubbleLeftRight,
@@ -15,7 +14,7 @@ import {
   HiOutlineChevronDoubleRight,
 } from "react-icons/hi2";
 
-const ICON_SIZE = 26; // consistent outlined size
+const ICON_SIZE = 22;
 
 function Item({ to, icon: Icon, label, collapsed, onClick }) {
   return (
@@ -25,8 +24,10 @@ function Item({ to, icon: Icon, label, collapsed, onClick }) {
       onClick={onClick}
       className={({ isActive }) =>
         [
-          "flex items-center gap-4 rounded-md px-3 py-2 text-[15px]",
-          isActive ? "bg-[#96469C] text-white shadow" : "text-gray-700 hover:bg-[#96469C]/10",
+          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+          isActive
+            ? "bg-gradient-to-r from-[#96469C] to-blue-700 text-white shadow-md"
+            : "text-gray-600 hover:bg-gray-100 hover:text-[#96469C]",
         ].join(" ")
       }
       title={collapsed ? label : undefined}
@@ -40,44 +41,45 @@ function Item({ to, icon: Icon, label, collapsed, onClick }) {
 
 /* ---------- Desktop sidebar ---------- */
 function DesktopSidebar({ collapsed, onToggleCollapse }) {
+  const { logout } = useContext(AppContext);
   const nav = useNavigate();
 
   return (
     <aside
       className={[
-        "sticky top-3 h-full rounded-xl border bg-white p-3 flex flex-col",
-        collapsed ? "w-24" : "w-80", // wider rail + wider expanded
-        "transition-[width] duration-200",
-      ].join(" ")} 
-      aria-label="sidebar"  
+        "sticky top-3 h-[calc(100vh-1rem)] rounded-2xl border bg-white/90 backdrop-blur-md shadow-lg p-4 flex flex-col",
+        collapsed ? "w-20" : "w-72",
+        "transition-[width] duration-300 ease-in-out",
+      ].join(" ")}
+      aria-label="sidebar"
     >
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
-        {/* bigger logo */}
+      <div className="mb-6 flex items-center justify-between">
         {!collapsed ? (
-          <img src={logo} alt="Logo" className="h-14 w-auto object-contain" />
+          <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
         ) : (
-          <img src={logo} alt="Logo" className="h-12 w-auto object-contain mx-auto" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-10 w-auto object-contain mx-auto"
+          />
         )}
+        {!collapsed && (
+          <button
+            aria-label="Collapse sidebar"
+            onClick={onToggleCollapse}
+            className="ml-2 hidden lg:inline-flex items-center justify-center rounded-md border p-2 hover:bg-gray-100 transition"
+            title="Collapse"
+          >
+            <HiOutlineChevronDoubleLeft size={18} />
+          </button>
+        )}
+      </div>
 
-        {/* icon-only collapse/expand button (no text) */}
-          {!collapsed && (
-            <button
-              aria-label="Collapse sidebar"
-              onClick={onToggleCollapse}
-              className="ml-2 hidden lg:inline-flex items-center justify-center rounded border p-2 hover:bg-slate-50"
-              title="Collapse"
-            >
-              <HiOutlineChevronDoubleLeft size={18} />
-            </button>
-          )} 
-              </div>
-
-              {/* Rail expand icon when collapsed (full width) */}
       {collapsed && (
         <button
           onClick={onToggleCollapse}
-          className="mb-3 w-full grid place-items-center rounded-md border py-2 hover:bg-slate-50"
+          className="mb-4 w-full grid place-items-center rounded-md border py-2 hover:bg-gray-100 transition"
           aria-label="Expand sidebar"
           title="Expand"
         >
@@ -85,21 +87,46 @@ function DesktopSidebar({ collapsed, onToggleCollapse }) {
         </button>
       )}
 
-      {/* Nav */}
-      <nav className="space-y-2">
-        <Item to="/dashboard" icon={HiOutlineSquares2X2} label="Dashboard" collapsed={collapsed} />
-        <Item to="/dashboard/chat" icon={HiOutlineChatBubbleLeftRight} label="Chat" collapsed={collapsed} />
-        <Item to="/dashboard/notifications" icon={HiOutlineBell} label="Notification" collapsed={collapsed} />
-        <Item to="/dashboard/membership" icon={HiOutlineCurrencyRupee} label="Membership" collapsed={collapsed} />
-        <Item to="/dashboard/settings" icon={HiOutlineCog6Tooth} label="Settings" collapsed={collapsed} />
+      {/* Navigation */}
+      <nav className="space-y-2 flex-1">
+        <Item
+          to="/dashboard"
+          icon={HiOutlineSquares2X2}
+          label="Dashboard"
+          collapsed={collapsed}
+        />
+        <Item
+          to="/dashboard/chat"
+          icon={HiOutlineChatBubbleLeftRight}
+          label="Chat"
+          collapsed={collapsed}
+        />
+        <Item
+          to="/dashboard/notifications"
+          icon={HiOutlineBell}
+          label="Notification"
+          collapsed={collapsed}
+        />
+        <Item
+          to="/dashboard/membership"
+          icon={HiOutlineCurrencyRupee}
+          label="Membership"
+          collapsed={collapsed}
+        />
+        <Item
+          to="/dashboard/settings"
+          icon={HiOutlineCog6Tooth}
+          label="Settings"
+          collapsed={collapsed}
+        />
       </nav>
 
-      {/* Footer – pinned bottom; icon-only when collapsed */}
-      <div className="mt-auto pt-4">
+      {/* Footer */}
+      <div className="pt-4">
         {collapsed ? (
           <button
             onClick={() => nav("/login")}
-            className="w-full grid place-items-center rounded-md bg-orange-600 py-3 text-white"
+            className="w-full grid place-items-center rounded-lg bg-gradient-to-r from-orange-600 to-red-600 py-3 text-white shadow-md hover:opacity-90 transition"
             title="Logout"
             aria-label="Logout"
           >
@@ -107,42 +134,26 @@ function DesktopSidebar({ collapsed, onToggleCollapse }) {
           </button>
         ) : (
           <button
-            onClick={() => nav("/login")}
-            className="w-full flex items-center justify-center gap-3 rounded-md bg-orange-600 py-3 text-white"
+            onClick={() => {
+              logout();
+              nav("/login");
+            }}
+            className="w-full flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 py-3 text-white shadow-md hover:opacity-90 transition"
           >
             <HiOutlineArrowLeftOnRectangle size={ICON_SIZE} />
             <span>Logout</span>
           </button>
         )}
       </div>
-       {/* <div className="sticky bottom-0 -mx-3 px-3">
-        <div className="border-t bg-white/95 backdrop-blur px-0 pt-3 pb-3">
-          {collapsed ? (
-            <button 
-              onClick={() => nav("/login")}
-              className="w-full grid place-items-center rounded-md bg-orange-600 py-3 text-white"
-              title="Logout"
-              aria-label="Logout"
-            >
-              <HiOutlineArrowLeftOnRectangle size={ICON_SIZE} />
-            </button>
-          ) : (
-            <button
-              onClick={() => nav("/login")}
-              className="w-full flex items-center justify-center gap-3 rounded-md bg-orange-600 py-3 text-white"
-            >
-              <HiOutlineArrowLeftOnRectangle size={ICON_SIZE} />
-              <span>Logout</span>
-            </button>
-          )}
-        </div>
-      </div> */}
     </aside>
   );
 }
 
 /* ---------- Mobile drawer ---------- */
 function MobileDrawer({ open, onClose }) {
+  const { logout } = useContext(AppContext);
+  const nav = useNavigate();
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -154,36 +165,65 @@ function MobileDrawer({ open, onClose }) {
 
   const drawer = (
     <div className="fixed inset-0 z-50">
-      {/* Scrim */}
-      <div className="absolute inset-0 bg-black/40" onClick={onClose} aria-hidden />
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden
+      />
       {/* Panel */}
-      <div className="absolute left-0 top-0 h-full w-[85%] max-w-[360px] bg-white p-4 shadow-xl flex flex-col">
-        <div className="mb-4 flex items-center justify-between">
-          <img src={logo} alt="Logo" className="h-14 w-auto object-contain" />
+      <div className="absolute left-0 top-0 h-full w-[85%] max-w-[320px] bg-white shadow-2xl flex flex-col animate-slide-in">
+        <div className="p-4 flex items-center justify-between border-b">
+          <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
           <button
             onClick={onClose}
-            className="rounded-md border px-3 py-1 text-sm hover:bg-slate-50"
+            className="rounded-md border px-3 py-1 text-sm hover:bg-gray-100"
           >
             Close
           </button>
         </div>
 
-        <nav className="space-y-2">
-          <DrawerLink to="/dashboard" label="Dashboard" icon={HiOutlineSquares2X2} onClose={onClose} />
-          <DrawerLink to="/dashboard/chat" label="Chat" icon={HiOutlineChatBubbleLeftRight} onClose={onClose} />
-          <DrawerLink to="/dashboard/notifications" label="Notification" icon={HiOutlineBell} onClose={onClose} />
-          <DrawerLink to="/dashboard/membership" label="Membership" icon={HiOutlineCurrencyRupee} onClose={onClose} />
-          <DrawerLink to="/dashboard/settings" label="Settings" icon={HiOutlineCog6Tooth} onClose={onClose} />
+        <nav className="p-4 space-y-2 flex-1">
+          <DrawerLink
+            to="/dashboard"
+            label="Dashboard"
+            icon={HiOutlineSquares2X2}
+            onClose={onClose}
+          />
+          <DrawerLink
+            to="/dashboard/chat"
+            label="Chat"
+            icon={HiOutlineChatBubbleLeftRight}
+            onClose={onClose}
+          />
+          <DrawerLink
+            to="/dashboard/notifications"
+            label="Notification"
+            icon={HiOutlineBell}
+            onClose={onClose}
+          />
+          <DrawerLink
+            to="/dashboard/membership"
+            label="Membership"
+            icon={HiOutlineCurrencyRupee}
+            onClose={onClose}
+          />
+          <DrawerLink
+            to="/dashboard/settings"
+            label="Settings"
+            icon={HiOutlineCog6Tooth}
+            onClose={onClose}
+          />
         </nav>
 
-        {/* logout pinned bottom */}
-        <div className="mt-auto pt-4">
+        <div className="p-4 border-t">
           <button
             onClick={() => {
+              logout();
               onClose();
-              window.location.href = "/login";
+              nav("/login");
             }}
-            className="w-full flex items-center justify-center gap-3 rounded-md bg-orange-600 py-3 text-white"
+            className="w-full flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 py-3 text-white shadow-md hover:opacity-90 transition"
           >
             <HiOutlineArrowLeftOnRectangle size={ICON_SIZE} />
             <span>Logout</span>
@@ -204,8 +244,10 @@ function DrawerLink({ to, icon: Icon, label, onClose }) {
       onClick={onClose}
       className={({ isActive }) =>
         [
-          "flex items-center gap-4 rounded-md px-3 py-2 text-[15px]",
-          isActive ? "bg-[#96469C] text-white shadow" : "text-gray-700 hover:bg-[#96469C]/10",
+          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+          isActive
+            ? "bg-gradient-to-r from-[#96469C] to-blue-700 text-white shadow"
+            : "text-gray-600 hover:bg-gray-100 hover:text-[#96469C]",
         ].join(" ")
       }
     >
@@ -219,5 +261,10 @@ export default function Sidebar(props) {
   if (props.variant === "mobile") {
     return <MobileDrawer open={props.open} onClose={props.onClose} />;
   }
-  return <DesktopSidebar collapsed={props.collapsed} onToggleCollapse={props.onToggleCollapse} />;
+  return (
+    <DesktopSidebar
+      collapsed={props.collapsed}
+      onToggleCollapse={props.onToggleCollapse}
+    />
+  );
 }

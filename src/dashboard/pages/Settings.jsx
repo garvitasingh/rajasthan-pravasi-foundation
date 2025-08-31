@@ -184,7 +184,7 @@ export default function Settings() {
             <img
               src={form.photoPreview || avatarPlaceholder}
               alt="Profile"
-              className="h-32 w-32 rounded-full object-cover border shadow"
+              className="h-32 w-32 rounded-full object-cover  shadow border-4 border-[#96469C]"
             />
 
             {/* Upload button */}
