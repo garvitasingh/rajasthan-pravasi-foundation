@@ -46,7 +46,7 @@ export default function NewsSection() {
           {[1, 2, 3].map((_, i) => (
             <div
               key={i}
-              className="bg-white shadow-md p-3 flex flex-col items-center"
+              className="bg-[#FCEEE3] shadow-md p-3 flex flex-col items-center"
               style={{
                 borderTopLeftRadius: "30px",
                 borderTopRightRadius: "2px",
@@ -88,33 +88,29 @@ export default function NewsSection() {
         </div>
 
         {/* Bottom Buttons */}
-        <div className="flex justify-center gap-6 mt-16">
-          <GradientButton
-            width="106px"
-            height="68px"
-            borderRadius="2px 30px 2px 30px"
-          >
-            <h4 style={{ lineHeight: 1, fontWeight: 600, fontSize: "20px" }}>
-              BACK
-            </h4> 
-          </GradientButton>
-              <div style={{ width: "20px" }} />
-          <GradientButton width="200px" height="68px" borderRadius="40px">
-            <h4 style={{ lineHeight: 1, fontWeight: 600, fontSize: "20px" }}>
-              VIEW
-            </h4>
-          </GradientButton>
-              <div style={{ width: "20px" }} />
-          <GradientButton
-            width="106px"
-            height="68px"
-            borderRadius="30px 2px 30px 2px"
-          >
-            <h4 style={{ lineHeight: 1, fontWeight: 600, fontSize: "20px" }}>
-              NEXT
-            </h4>
-          </GradientButton>
-        </div>
+        <div className="flex justify-center items-center gap-6 mt-16">
+  {/* Back Button */}
+  <button
+    className="w-[106px] h-[68px] bg-gray-200 rounded-tl-sm rounded-tr-[30px] rounded-bl-sm rounded-br-[30px] flex items-center justify-center"
+  >
+    <h4 className="font-semibold text-lg leading-none">BACK</h4>
+  </button>
+
+  {/* View Button */}
+  <button
+    className="w-[175px] h-[68px] bg-[#EF5C10] rounded-[40px] flex items-center justify-center text-white"
+  >
+    <h4 className="font-semibold text-lg leading-none">VIEW</h4>
+  </button>
+
+  {/* Next Button */}
+  <button
+    className="w-[106px] h-[68px] bg-gray-200 rounded-tl-[30px] rounded-tr-sm rounded-bl-[30px] rounded-br-sm flex items-center justify-center"
+  >
+    <h4 className="font-semibold text-lg leading-none">NEXT</h4>
+  </button>
+</div>
+
       </div>
     </section>
   );

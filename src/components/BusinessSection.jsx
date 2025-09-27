@@ -30,12 +30,12 @@ export default function FeaturedBusiness() {
     ];
 
     return ( 
-        <section className="w-full py-16 md:py-24 relative overflow-hidden">
-            <img
+        <section className="w-full relative overflow-hidden">
+            {/* <img
                 src={mandalaBg}
                 alt="mandala"
                 className="absolute top-1/2 left-1/2 w-[980px] h-[980px] -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none select-none"
-            />
+            /> */}
 
             {/* Gradient Background Wrapper */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
@@ -54,7 +54,7 @@ export default function FeaturedBusiness() {
                 <div
                     className="p-8"
                     style={{
-                        background: "linear-gradient(90deg, #FFC92E 0%, #FF9AB1 35.54%, #F313F7 69.29%, #A328F9 100%)",
+    background: "linear-gradient(0.42deg, rgba(252, 238, 227, 0.1) 0.35%, rgba(230, 138, 87, 0.6) 50.94%, #DB580F 96.76%)",
   borderTopLeftRadius: "50px",
                                     borderTopRightRadius: "2px",
                                     borderBottomRightRadius: "50px",
