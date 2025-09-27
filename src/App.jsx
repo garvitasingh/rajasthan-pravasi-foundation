@@ -30,6 +30,7 @@ import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
 import { Toaster } from "react-hot-toast";
 import { AppContextProvider } from "./context/AppContext";
+import Navbar from "./components/Navbar";
 
 export default function AppWrapper() {
   return (
@@ -47,6 +48,7 @@ function AnimatedRoutes() {
   return (
     <>
       <Toaster />
+      <Navbar />
       <Routes location={location} key={location.pathname}>
         {/* Public pages (no transition) */}
         <Route path="/" element={<LandingPage />} />

@@ -8,7 +8,8 @@ const successStories = [
     address: "22, Dr. APJ Abdul Kalam Road",
     description:
       "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-    gradient: "from-[#FF77E9] to-[#480073]", // pink to purple
+    gradient: "from-[#FF77E9] to-[#480073]", // pink to purple,
+    color: "#EDA536"
   },
   {
     name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
@@ -16,6 +17,7 @@ const successStories = [
     description:
       "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
     gradient: "from-[#FFC830] to-[#480073]", // orange to purple
+    color: "#BA5C9E"
   },
   {
     name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
@@ -23,6 +25,7 @@ const successStories = [
     description:
       "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
     gradient: "from-[#FF77E9] to-[#480073]", // pink to purple
+    color: "#41C45C"
   },
   {
     name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
@@ -30,12 +33,13 @@ const successStories = [
     description:
       "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
     gradient: "from-[#FFC830] to-[#480073]", // orange to purple
+    color: "#EA2774"
   },
 ];
 
 export default function PaidInfoSection() {
   return (
-    <section className="w-full py-20 relative">
+    <section className="w-full relative">
       {/* Left tree decoration */}
       <div className="relative z-10 max-w-[1220px] mx-auto">
         <div className="flex items-center justify-between relative">
@@ -85,10 +89,11 @@ export default function PaidInfoSection() {
               borderTopRightRadius: "30px",
               borderBottomLeftRadius: "30px",
               borderBottomRightRadius: "2px",
-              background: `linear-gradient(to bottom, ${story.gradient
-                .replace("from-[#", "#")
-                .replace("] to-[#", ", #")
-                .replace("]", "")})`,
+              // background: `linear-gradient(to bottom, ${story.gradient
+              //   .replace("from-[#", "#")
+              //   .replace("] to-[#", ", #")
+              //   .replace("]", "")})`,
+              background: `${story.color}`
             }}
           >
             {/* Profile Image */}

@@ -1,46 +1,22 @@
 // src/components/PageLayout.jsx
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import HomeBanner from "./HomeBanner";
 
-export default function PageLayout({ bgImage, children, fullWidth = false }) {
-  const [offsetY, setOffsetY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setOffsetY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+export default function PageLayout({ children, fullWidth = false }) {
   return (
     <div className="w-full">
-      {/* Hero */}
-      <div 
-        className="relative h-[400px] overflow-hidden rounded-b-[100px]"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: `center ${offsetY * 0.2}px`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/70 to-black"></div>
-        <Navbar />
-      </div>
+      {/* Navbar */}
 
       {/* Page Content */}
       {fullWidth ? (
-        // Full width content with 30px horizontal padding
-        <div className="w-full px-[30px]">
-          {children}
-        </div>
+        <div className="w-full px-[30px]">{children}</div>
       ) : (
-        // Regular constrained content
-        <div className="max-w-5xl mx-auto px-4 py-12">
-          {children}
-        </div>
+        <div className="max-w-5xl mx-auto px-4 py-12">{children}</div>
       )}
 
       <Footer />
     </div>
   );
-} 
+}

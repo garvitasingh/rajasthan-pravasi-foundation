@@ -4,7 +4,7 @@ import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Info, Image, Phone, HelpCircle } from "lucide-react"; // 👈 icons import
 import GradientButton from "./GradientButton";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo2.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link
             key={item.label}
             to={item.path}
-            className={`text-white ${linkCls(
+            className={`text-black ${linkCls(
               item.path
             )} flex items-center gap-2`}
           >
@@ -60,22 +60,21 @@ export default function Navbar() {
         ))}
 
         <Link
-          to="/login"
+  to="/login"
+  className="ml-2 flex items-center justify-center z-40 border border-orange-500 text-orange-500 bg-white"
+  style={{ width: 100, height: 40, borderRadius: 20 }}
+>
+  LOGIN
+</Link>
+
+
+        <button
           className="btn-login ml-2 flex items-center justify-center z-40 bg-[#96469C] text-white "
           style={{ width: 100, height: 40, borderRadius: 20 }}
-        >
-          LOGIN
-        </Link>
-
-        <GradientButton
-          width="100px"
-          height="40px"
-          borderRadius="20px"
-          className="ml-2 z-40"
           onClick={() => (window.location.href = "/signup")}
         >
           JOIN US
-        </GradientButton>
+        </button>
       </div>
 
       {/* Mobile:  */}
