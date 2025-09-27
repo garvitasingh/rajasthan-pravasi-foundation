@@ -50,9 +50,9 @@ function AnimatedRoutes() {
       <Toaster />
       <Navbar />
       <Routes location={location} key={location.pathname}>
-        {/* Public pages (no transition) */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+        {/* Public pages (no transition) */}  
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
