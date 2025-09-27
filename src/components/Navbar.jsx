@@ -11,7 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/home", icon: <Home size={18} /> },
+    { label: "Home", path: "/", icon: <Home size={18} /> },
     { label: "About Us", path: "/about", icon: <Info size={18} /> },
     { label: "Gallery", path: "/gallery", icon: <Image size={18} /> },
     { label: "Contact", path: "/contact", icon: <Phone size={18} /> },
