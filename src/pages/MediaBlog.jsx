@@ -1,5 +1,7 @@
 import mandalaBg from "../assets/mandala.png";
-import sampleImg from "../assets/Frame 20.png";
+import sampleImg1 from "../assets/Frame 21.png";
+import sampleImg2 from "../assets/Frame 22.png";
+import sampleImg3 from "../assets/Frame 23.png";
 
 export default function MediaBlog() {
   const businesses = [
@@ -9,7 +11,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg1,
     },
     {
       name: "SHRI RIDDHI PROPERTIES",
@@ -17,7 +19,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg2,
     },
     {
       name: "SHRI RIDDHI PROPERTIES",
@@ -25,7 +27,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg3,
     },
     {
       name: "SHRI RIDDHI PROPERTIES",
@@ -33,7 +35,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg1,
     },
     {
       name: "SHRI RIDDHI PROPERTIES",
@@ -41,7 +43,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg2,
     },
     {
       name: "SHRI RIDDHI PROPERTIES",
@@ -49,7 +51,7 @@ export default function MediaBlog() {
       description:
         "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
       location: "Gurgaon, Haryana",
-      image: sampleImg,
+      image: sampleImg3,
     },
   ];
 
