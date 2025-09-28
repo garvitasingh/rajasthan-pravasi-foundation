@@ -64,7 +64,7 @@ export default function PaidInfoSection() {
               Benefits of paid user
             </h2>
 
-            <p className="text-gray-700 mb-6 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
+            <p className="text-gray-700 font-semibold mb-6 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
              Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through user-centered problem solving. A/B testing compares different design variations.
             </p>
             <div style={{ height: "20px" }} />
