@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Info, Image, Phone, HelpCircle } from "lucide-react"; // 👈 icons import
-import GradientButton from "./GradientButton";
 import logo from "../assets/logo2.png";
 
 export default function Navbar() {

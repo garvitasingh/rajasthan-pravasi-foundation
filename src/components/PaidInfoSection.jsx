@@ -45,11 +45,11 @@ export default function PaidInfoSection() {
         <div className="flex items-center justify-between relative">
           {/* Left Tree */}
 
-          <img
+          {/* <img
             src={tree}
             alt="Left Tree"
             className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain"
-          />
+          /> */}
 
           <div className="flex-1 text-center px-6 md:px-12">
             <div style={{ height: "80px" }} />
@@ -64,18 +64,18 @@ export default function PaidInfoSection() {
               Benefits of paid user
             </h2>
 
-            <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
+            <p className="text-gray-700 mb-6 text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose font-poppins font-normal max-w-3xl mx-auto">
              Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through user-centered problem solving. A/B testing compares different design variations.
             </p>
             <div style={{ height: "20px" }} />
           </div>
           {/* Right Tree */}
 
-          <img
+          {/* <img
             src={tree}
             alt="Right Tree"
             className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain"
-          />
+          /> */}
         </div>
       </div>
       {/* Cards */}
