@@ -7,22 +7,16 @@ export default function NewsSection() {
   return (
     <section className="w-full py-16 md:py-24 relative overflow-hidden">
       {/* Mandala Background */}
-      <img
+      {/* <img
         src={mandala}
         alt="mandala"
         className="absolute top-1/2 left-1/2 w-[980px] h-[980px] -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none select-none"
-      />
+      /> */}
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Heading */}
-        <div className="flex items-center justify-between relative mb-12">
-          {/* Left Tree */}
-          <img
-            src={tree}
-            alt="Left Tree"
-            className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain"
-          />
+        <div className="mb-12">
           <h2
             className="text-center text-orange-500"
             style={{
@@ -33,12 +27,6 @@ export default function NewsSection() {
           >
             News & Updates
           </h2>
-          {/* Right Tree */}
-          <img
-            src={tree}
-            alt="Right Tree"
-            className="hidden md:block w-[140px] md:w-[160px] lg:w-[180px] object-contain"
-          />
         </div>
 
         {/* News Grid */}

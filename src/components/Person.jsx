@@ -71,7 +71,6 @@ const FounderCard = ({ member }) => {
 const MemberCard = ({ member }) => {
   return (
     <div className="bg-[#fff2e9] rounded-xl shadow-md overflow-hidden flex flex-col items-center text-center p-5">
-        {console.log(member, "member")}
       <img
         src={member.image.foun}
         alt={member.name}
