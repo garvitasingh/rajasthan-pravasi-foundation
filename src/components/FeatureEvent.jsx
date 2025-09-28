@@ -91,9 +91,9 @@ export default function FeaturedEvent() {
                   {/* Footer */}
                   <div className="flex items-center justify-between mt-4">
                     <button className="bg-orange-500 text-white text-sm font-semibold px-4 py-1 rounded-full">
-                      OPEN
+                      READ
                     </button>
-                    <p className="text-gray-600 text-xs flex items-center">
+                    <p className="text-gray-800 text-xs flex items-center font-bold">
                       <span className="mr-1">📍</span> {biz.location}
                     </p>
                   </div>

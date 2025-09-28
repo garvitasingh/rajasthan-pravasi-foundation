@@ -82,7 +82,7 @@ const MemberCard = ({ member }) => {
       <img
         src={member.image.foun}
         alt={member.name}
-        className="w-full h-56 object-cover rounded-md"
+        className="object-cover rounded-md"
       />
       <h3 className="mt-4 text-lg font-bold text-black">{member.name}</h3>
       <span className="mt-2 inline-block bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -118,24 +118,24 @@ export default function FoundationStructure() {
           <img
             src={foun1}
             alt={members[0].name}
-            className="rounded-xl mb-3 w-full h-64 object-cover"
+            className="w-[261px] h-[261px] rounded-xl mb-3 w-full h-64 object-cover"
           />
           <h3 className="font-bold text-lg">{members[0].name}</h3>
           <span className="bg-orange-500 text-white px-3 py-1 text-xs rounded-full inline-block mt-2">
             {members[0].role}
           </span>
-          <p className="text-gray-600 mt-3 text-sm">{members[0].company}</p>
+          <p className="text-gray-600 mt-3 text-sm">{members[0].description}</p>
         </div>
 
         {/* Right Content (2 columns span) */}
         <div className="md:col-span-2 text-start bg-white rounded-2xl p-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-3xl font-bold text-gray-900">
             Gyan Singh Rathore
           </h2>
-          <p className="text-orange-600 font-semibold mt-1 underline">
+          <p className="text-orange-600 text-2xl font-bold mt-1">
             Chairman
           </p>
-          <p className="mt-4 text-gray-850 text-xl leading-relaxed">
+          <p className="mt-4 text-gray-750 text-xl font-semibold leading-relaxed">
             Gyan Singh Rathore, the founder of Rajasthan Pravasi Foundation, is
             deeply passionate about supporting Rajasthani people across India.
             His vision is to help families in times of need, especially when
