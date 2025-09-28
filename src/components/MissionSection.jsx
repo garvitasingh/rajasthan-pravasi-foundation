@@ -68,10 +68,16 @@ export default function MissionSection() {
         {missionPoints.map((point, index) => (
           <div
             key={index}
-            className="bg-white text-black rounded-2xl shadow-md p-6 relative"
+            className="bg-white h-[215px] w-[283px] text-black rounded-2xl shadow-md p-6 relative text-center"
+            style={{
+              borderTopLeftRadius: "30px",
+              borderTopRightRadius: "2px",
+              borderBottomLeftRadius: "2px",
+              borderBottomRightRadius: "30px",
+            }}
           >
-            <h3 className="font-semibold text-orange-600 mb-2">{point.title}</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
+            <h3 className="font-bold text-orange-600 mb-2">{point.title}</h3>
+            <p className="text-gray-700 text-base leading-relaxed">
               {point.description}
             </p>
 

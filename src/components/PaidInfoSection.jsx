@@ -56,9 +56,9 @@ export default function PaidInfoSection() {
             <h2
               className="text-orange-500 mb-6"
               style={{
-                fontFamily: "Italianno, cursive",
-                fontWeight: 400,
-                fontSize: "60px",
+                // fontFamily: "Italianno, cursive",
+                fontWeight: 700,
+                fontSize: "48px",
               }}
             >
               Benefits of paid user
