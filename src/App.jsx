@@ -31,6 +31,7 @@ import PageTransition from "./components/PageTransition";
 import { Toaster } from "react-hot-toast";
 import { AppContextProvider } from "./context/AppContext";
 import Navbar from "./components/Navbar";
+import MediaBlog from "./pages/MediaBlog";
 
 export default function AppWrapper() {
   return (
@@ -56,6 +57,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/media-blog" element={<MediaBlog />} />
         <Route path="/faq" element={<FAQ />} />
 
         {/* Auth pages (with transition) */}
