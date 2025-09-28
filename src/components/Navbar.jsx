@@ -13,6 +13,7 @@ export default function Navbar() {
     { label: "Home", path: "/", icon: <Home size={18} /> },
     { label: "About Us", path: "/about", icon: <Info size={18} /> },
     { label: "Gallery", path: "/gallery", icon: <Image size={18} /> },
+    { label: "Media & Blog", path: "/media-blog", icon: <Image size={18} /> },
     { label: "Contact", path: "/contact", icon: <Phone size={18} /> },
     { label: "FAQ", path: "/faq", icon: <HelpCircle size={18} /> },
   ];
