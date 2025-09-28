@@ -20,9 +20,9 @@ export default function NewsSection() {
           <h2
             className="text-center text-orange-500"
             style={{
-              fontFamily: "Italianno, cursive",
-              fontWeight: 400,
-              fontSize: "60px",
+              // fontFamily: "Italianno, cursive",
+              fontWeight: 700,
+              fontSize: "48px",
             }}
           >
             News & Updates
