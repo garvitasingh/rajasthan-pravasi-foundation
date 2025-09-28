@@ -9,7 +9,7 @@ export default function About() {
   return (
     <PageLayout bgImage={bgImage} fullWidth={true} > 
       <AboutUs />
-      <TeamSection /> 
+      {/* <TeamSection />  */}
     </PageLayout> 
   );
 }

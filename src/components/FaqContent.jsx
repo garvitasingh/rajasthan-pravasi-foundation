@@ -41,9 +41,9 @@ export default function FaqContent() {
       </h2>
 
       {/* Card */}
-      <div className="relative w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 md:p-12 overflow-hidden">
+      <div className="bg-[#F7E9DE] relative w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 md:p-12 overflow-hidden">
         {/* Mandala background */}
-        <img
+        {/* <img
           src={mandalaBg}
           alt="Mandala Background"
           className="absolute pointer-events-none select-none"
@@ -55,7 +55,7 @@ export default function FaqContent() {
             opacity: 0.05,
             zIndex: 0,
           }}
-        />
+        /> */}
 
         {/* FAQ Content */}
         <div className="relative z-10 divide-y divide-gray-200">
@@ -90,10 +90,9 @@ export default function FaqContent() {
 
         {/* Button at bottom */}
         <div className="mt-12 flex justify-center">
-          <GradientButton
-            width="180px"
-            height="55px"
+          <button
             borderRadius="8px 30px 8px 30px"
+            className="w-[175px] h-[50px] bg-[#EF5A0F] rounded-[40px] text-white"
           >
             <h4
               style={{
@@ -106,7 +105,7 @@ export default function FaqContent() {
             >
               Need Help?
             </h4>
-          </GradientButton>
+          </button>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import qrCode from "../assets/qr_code.png"; // place QR in src/assets
 
 export default function Footer() {
   return ( 
-    <footer className="bg-[#323C4A] text-white py-12">
+    <footer className="bg-[#DB580F] text-white py-12">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         
         {/* QR Code Section */}

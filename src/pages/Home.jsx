@@ -11,6 +11,7 @@ import HomeBanner from "../components/HomeBanner";
 import Navbar from "../components/Navbar";
 import MissionSection from "../components/MissionSection";
 import FoundationStructure from "../components/Person";
+import FeaturedEvent from "../components/FeatureEvent";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <HomeBanner />
       <MissionSection />
       <FoundationStructure />
+      <FeaturedEvent />
       <PaidInfoSection />
       <FeaturedBusiness />
       <NewsSection />

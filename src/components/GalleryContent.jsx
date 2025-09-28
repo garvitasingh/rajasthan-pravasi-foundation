@@ -41,14 +41,14 @@ export default function GalleryContent() {
         {galleryItems.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-[2px_30px_2px_30px] overflow-hidden group"
+            className="bg-[#fff2e9] shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-[2px_30px_2px_30px] overflow-hidden group"
           >
             {/* Image with hover zoom */}
             <div className="overflow-hidden">
               <img
                 src={item.img}
                 alt={item.text}
-                className="w-full h-52 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                className="px-2 pt-2 w-full h-52 object-cover transform group-hover:scale-110 transition-transform duration-500"
               />
             </div>
 
@@ -62,10 +62,11 @@ export default function GalleryContent() {
 
       {/* View All Button */}
       <div className="flex justify-center mt-6 mb-20">
-        <GradientButton
-          width="170px"
-          height="55px"
+        <button
+          // width="170px"
+          // height="55px"
           borderRadius="8px 30px 8px 30px"
+          className="w-[175px] h-[68px] bg-[#EF5A0F] rounded-[40px]"
         >
           <h4
             style={{
@@ -77,7 +78,7 @@ export default function GalleryContent() {
           >
             VIEW ALL
           </h4>
-        </GradientButton>
+        </button>
       </div>
     </div>
   );
