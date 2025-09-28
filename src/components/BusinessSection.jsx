@@ -42,9 +42,9 @@ export default function FeaturedBusiness() {
                 <h2
                     className="text-center mb-12 text-orange-500"
                     style={{
-                        fontFamily: "Italianno, cursive",
-                        fontWeight: 400,
-                        fontSize: "60px",
+                        // fontFamily: "Italianno, cursive",
+                        fontWeight: 700,
+                        fontSize: "48px",
                     }}
                 >
                     Featured business
@@ -104,10 +104,10 @@ export default function FeaturedBusiness() {
                         ))}
                     </div>
                     <div className="flex justify-center mt-12">
-                        <button className="bg-white text-black font-semibold px-6 py-2 rounded-[10px] shadow-md hover:shadow-lg"
+                        <button className="bg-[#EF5A0F] text-white font-semibold px-6 py-2 rounded-[30px] shadow-md hover:shadow-lg"
                             style={{
         height: "58px",
-                                borderRadius: "30px 2px 30px 2px",
+                                // borderRadius: "30px 2px 30px 2px",
                                 boxShadow: "0px 0px 20px 10px rgba(249, 115, 22, 0.2)"
                             }}>
                             VIEW ALL BUSINESS

@@ -19,10 +19,9 @@ export default function HomeBanner() {
         {/* Second Image (Overlapping Card) */}
         <div
           className="absolute left-1/2 bottom-0 w-[90%] sm:w-3/4 md:w-2/3 lg:w-1/2 
-                     transform -translate-x-1/2 translate-y-[250px] sm:translate-y-[200px] md:translate-y-[240px] 
-                     bg-white/70 rounded-2xl md:rounded-3xl shadow-lg 
-                     p-4 sm:p-6 md:p-8 text-center"
-        >
+           transform -translate-x-1/2 translate-y-[250px] sm:translate-y-[200px] md:translate-y-[240px] 
+           bg-white/70 rounded-2xl md:rounded-3xl 
+           p-4 sm:p-6 md:p-8 text-center" >
           {/* Heading */}
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-600">
             Welcome to <br />

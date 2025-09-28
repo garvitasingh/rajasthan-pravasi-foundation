@@ -59,13 +59,12 @@ export default function Navbar() {
         ))}
 
         <Link
-  to="/login"
-  className="ml-2 flex items-center justify-center z-40 border border-orange-500 text-orange-500 bg-white"
-  style={{ width: 100, height: 40, borderRadius: 20 }}
->
-  LOGIN
-</Link>
-
+        to="/login"
+        className="ml-2 flex items-center justify-center z-40 border-2 border-orange-500 text-orange-500 font-semibold bg-white"
+        style={{ width: 100, height: 40, borderRadius: 20 }}
+      >
+        LOGIN
+      </Link>
 
         <button
           className="btn-login ml-2 flex items-center justify-center z-40 bg-[#96469C] text-white "

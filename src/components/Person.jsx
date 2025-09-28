@@ -70,7 +70,15 @@ const FounderCard = ({ member }) => {
 
 const MemberCard = ({ member }) => {
   return (
-    <div className="bg-[#fff2e9] rounded-xl shadow-md overflow-hidden flex flex-col items-center text-center p-5">
+    <div 
+    className="bg-[#fff2e9] w-[283px] h-[440px] rounded-xl shadow-md overflow-hidden flex flex-col items-center text-center p-5"
+        style={{
+              borderTopLeftRadius: "30px",
+              borderTopRightRadius: "2px",
+              borderBottomLeftRadius: "2px",
+              borderBottomRightRadius: "30px",
+            }}
+    >
       <img
         src={member.image.foun}
         alt={member.name}
@@ -98,7 +106,15 @@ export default function FoundationStructure() {
 
         <div className="grid md:grid-cols-3 gap-6 items-start mb-12">
         {/* Left Card */}
-        <div className="bg-[#fff2e9] shadow-lg rounded-2xl p-4 text-center">
+        <div 
+        className="bg-[#fff2e9] w-[283px] h-[440px] shadow-lg rounded-2xl p-4 text-center"
+        style={{
+              borderTopLeftRadius: "30px",
+              borderTopRightRadius: "2px",
+              borderBottomLeftRadius: "2px",
+              borderBottomRightRadius: "30px",
+            }}
+        >
           <img
             src={foun1}
             alt={members[0].name}
