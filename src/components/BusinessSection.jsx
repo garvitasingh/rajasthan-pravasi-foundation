@@ -40,11 +40,10 @@ export default function FeaturedBusiness() {
             {/* Gradient Background Wrapper */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
                 <h2
-                    className="text-center mb-12 text-orange-500"
+                    className="text-center mb-12 text-[#EF5C10] sm:text-2xl md:text-4xl"
                     style={{
                         // fontFamily: "Italianno, cursive",
                         fontWeight: 700,
-                        fontSize: "48px",
                     }}
                 >
                     Featured business

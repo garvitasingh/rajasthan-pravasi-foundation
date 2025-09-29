@@ -36,7 +36,7 @@ export default function FaqContent() {
   return (
     <div className="flex flex-col justify-center items-center py-10 px-4">
       {/* Heading */}
-      <h2 className="text-center text-4xl font-extrabold text-orange-600 mb-10">
+      <h2 className="text-center text-4xl font-extrabold text-[#EF5C10] mb-10">
         Frequently Asked Questions
       </h2>
 

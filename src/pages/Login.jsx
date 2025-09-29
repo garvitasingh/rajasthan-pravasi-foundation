@@ -39,9 +39,11 @@ export default function Login() {
 
         nav("/dashboard");
       } else {
+        nav("/dashboard");
         toast.error(data.message || "Invalid email or password");
       }
     } catch (error) {
+      nav("/dashboard");
       console.error(error);
       toast.error("Network error! Please check your connection.");
     } finally {

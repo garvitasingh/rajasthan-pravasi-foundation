@@ -19,12 +19,12 @@ export default function Contact() {
     <PageLayout bgImage={bgImage}>
       <div className="flex flex-col justify-center items-center py-10 px-4 md:px-8">
         {/* Heading */}
-        <h2 className="text-center text-4xl md:text-5xl font-extrabold text-orange-600 mb-10">
+        <h2 className="text-center sm:text-2xl md:text-4xl font-bold text-[#EF5C10] mb-10">
           Contact Us
         </h2>
 
         {/* Card Container */}
-        <div className="bg-[#F7E9DE] relative w-full max-w-5xl bg-white rounded-2xl shadow-xl p-8 md:p-12 overflow-hidden">
+        <div className="bg-[#F7E9DE] relative w-full max-w-5xl rounded-2xl shadow-xl p-8 md:p-12 overflow-hidden">
           {/* Mandala background */}
           {/* <img
             src={mandalaBg}

@@ -18,11 +18,10 @@ export default function NewsSection() {
         {/* Heading */}
         <div className="mb-12">
           <h2
-            className="text-center text-orange-500"
+            className="text-center sm:text-2xl md:text-4xl text-[#EF5C10]"
             style={{
               // fontFamily: "Italianno, cursive",
               fontWeight: 700,
-              fontSize: "48px",
             }}
           >
             News & Updates

@@ -34,12 +34,7 @@ export default function FeaturedEvent() {
       {/* Gradient Background Wrapper */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
         <h2
-          className="text-center mb-12 text-orange-500"
-          style={{
-            // fontFamily: "Italianno, cursive",
-            fontWeight: 700,
-            fontSize: "48px",
-          }}
+          className="text-center mb-12 text-[#EF5C10] sm:text-2xl text-bold md:text-4xl"
         >
           Featured Events
         </h2>
@@ -60,7 +55,7 @@ export default function FeaturedEvent() {
             {businesses.map((biz, i) => (
               <div
                 key={i}
-                className="bg-white shadow-md p-3 flex flex-col items-center"
+                className="bg-white md:w-[345px] h-[440px] shadow-md p-3 flex flex-col items-center"
                 style={{
                   borderTopLeftRadius: "30px",
                   borderTopRightRadius: "2px",
