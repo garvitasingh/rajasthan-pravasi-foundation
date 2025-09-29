@@ -5,7 +5,7 @@ import theme from "../common/theme";
 
 export default function IntroSection() {
   return (
-    <div className="relative flex flex-col items-center text-center py-12 mt-24">
+    <div className="relative flex flex-col items-center text-center py-12">
       {/* Mandala Background */}
       <img
         src={mandalaBg}
