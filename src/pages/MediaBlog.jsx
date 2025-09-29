@@ -60,12 +60,7 @@ export default function MediaBlog() {
       {/* Gradient Background Wrapper */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
         <h2
-          className="text-center mb-12 text-orange-500"
-          style={{
-            // fontFamily: "Italianno, cursive",
-            fontWeight: 700,
-            fontSize: "48px",
-          }}
+          className="text-center sm:text-2xl md:text-3xl font-bold text-[#EF5C10] mb-12"
         >
           Media & Blogs
         </h2>
@@ -78,7 +73,7 @@ export default function MediaBlog() {
             {businesses.map((biz, i) => (
               <div
                 key={i}
-                className="bg-[#fff2e9] w-[345px] h-[420px] shadow-md p-3 flex flex-col items-center"
+                className="bg-[#F7E9DE] md:w-[345px] h-[420px] shadow-md p-3 flex flex-col items-center"
                 style={{
                   borderTopLeftRadius: "30px",
                   borderTopRightRadius: "2px",
@@ -108,12 +103,12 @@ export default function MediaBlog() {
 
                   {/* Footer */}
                   <div className="flex items-center justify-between mt-4">
-                    <button className="bg-orange-500 text-white text-sm font-semibold px-4 py-1 rounded-full">
+                    <button className="bg-[#EF5C10] text-white text-sm font-semibold px-4 py-1 rounded-full">
                       READ
                     </button>
-                    <p className="text-gray-600 text-xs flex items-center">
+                    {/* <p className="text-gray-600 text-xs flex items-center">
                       <span className="mr-1">📍</span> {biz.location}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>

@@ -4,7 +4,6 @@ import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
 import img4 from "../assets/img4.png";
-import GradientButton from "../components/GradientButton";
 
 const galleryItems = [
   { img: img1, text: "IMAGE 01 DESCRIPTION" },
@@ -32,7 +31,7 @@ export default function GalleryContent() {
       />
 
       {/* Title */}
-      <h2 className="text-center text-orange-600 text-4xl font-extrabold mt-14 drop-shadow-sm">
+      <h2 className="text-center text-2xl md:text-4xl font-bold text-[#EF5C10] mt-14">
         Gallery
       </h2>
 
@@ -48,7 +47,7 @@ export default function GalleryContent() {
               <img
                 src={item.img}
                 alt={item.text}
-                className="px-2 pt-2 w-full h-52 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                className="px-2 pt-2 w-full h-52 object-cover rounded-[2px_30px_2px_30px] transform group-hover:scale-110 transition-transform duration-500"
               />
             </div>
 

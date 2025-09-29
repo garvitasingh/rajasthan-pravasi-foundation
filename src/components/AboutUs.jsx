@@ -70,7 +70,7 @@ const AboutUs = () => {
     <div className="w-full bg-white text-gray-800">
       {/* About Us */}
       <section className="text-center max-w-3xl mx-auto py-10 px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-orange-600 mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-[#EF5C10] mb-4">
           About Us
         </h2>
         <p className="text-gray-800 leading-relaxed">
@@ -121,7 +121,7 @@ const AboutUs = () => {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-12">
-      <h3 className="text-2xl md:text-3xl font-bold text-orange-600 mb-10 text-center">
+      <h3 className="text-2xl md:text-3xl font-bold text-[#EF5C10] mb-10 text-center">
         Engagement With Diaspora
       </h3>
 

@@ -54,11 +54,10 @@ export default function PaidInfoSection() {
           <div className="flex-1 text-center px-6 md:px-12">
             <div style={{ height: "80px" }} />
             <h2
-              className="text-orange-500 mb-6"
+              className="text-[#EF5C10] sm:text-2xl md:text-4xl mb-6"
               style={{
                 // fontFamily: "Italianno, cursive",
                 fontWeight: 700,
-                fontSize: "48px",
               }}
             >
               Benefits of paid user
