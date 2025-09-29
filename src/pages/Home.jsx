@@ -12,19 +12,22 @@ import Navbar from "../components/Navbar";
 import MissionSection from "../components/MissionSection";
 import FoundationStructure from "../components/Person";
 import FeaturedEvent from "../components/FeatureEvent";
+import AdVideo from "../components/Advertise";
+import adPoster from "../assets/banner.png";
 
 export default function Home() {
   return (
     <> 
       <HomeBanner />
+      {/* <IntroSection /> */}
+      <AdVideo poster={adPoster} />
       <MissionSection />
       <FoundationStructure />
       <FeaturedEvent />
       <PaidInfoSection />
       <FeaturedBusiness />
       <NewsSection />
-    {/* <IntroSection />
-    <PaidInfoSection />
+    {/* <PaidInfoSection />
     <FeaturedBusiness />
     <PartnersSection />
     <NewsSection /> 
