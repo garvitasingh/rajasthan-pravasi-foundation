@@ -23,7 +23,7 @@ export default function HomeBanner() {
            bg-white/70 rounded-2xl md:rounded-3xl 
            p-4 sm:p-6 md:p-8 text-center" >
           {/* Heading */}
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-600">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-500">
             Welcome to <br />
             Rajasthan Pravasi Foundation
           </h2>

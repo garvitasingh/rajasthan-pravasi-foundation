@@ -43,13 +43,16 @@ export default function AppWrapper() {
   );
 }
 
+// ✅ Routes where Navbar should be visible
+const navbarRoutes = ["/", "/about", "/gallery", "/contact", "/media-blog", "/faq"];
+
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <>
       <Toaster />
-      <Navbar />
+      {navbarRoutes.includes(location.pathname) && <Navbar />}
       <Routes location={location} key={location.pathname}>
         {/* Public pages (no transition) */}  
         {/* <Route path="/" element={<LandingPage />} /> */}

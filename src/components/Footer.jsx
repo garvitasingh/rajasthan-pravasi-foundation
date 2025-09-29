@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
 
         {/* Help & Support */}
-        <div>
+        {/* <div>
           <h4 className="font-bold underline underline-offset-4 mb-4">
             Help & Support
           </h4>
@@ -26,7 +26,7 @@ export default function Footer() {
             <li>Our partner programs</li>
             <li>Expert referral program</li> 
           </ul>
-        </div>
+        </div> */}
 
         {/* Pricing */}
         <div>
@@ -34,7 +34,7 @@ export default function Footer() {
             Pricing
           </h4>
           <ul className="space-y-2 text-gray-200">
-            <li>Free plan</li> 
+            {/* <li>Free plan</li>  */}
             <li>Membership</li>
           </ul>
         </div>
@@ -48,6 +48,7 @@ export default function Footer() {
             <li>About us</li>
             <li>Our mission</li>
             <li>Gallery</li>
+            <li>Media & Blog</li>
             <li>Events</li>
             <li>Partners</li>
           </ul>
