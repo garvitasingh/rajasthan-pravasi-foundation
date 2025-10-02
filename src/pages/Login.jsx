@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import mandala from "../assets/mandala.png";
+import mandala from "../assets/Frame 4.png";
 import palace from "../assets/palace.png";
-import logo from "../assets/logo2.png";
+import logo from "../assets/Frame 4.png";
 import toast from "react-hot-toast";
 import { AppContext } from "../context/AppContext";
 
@@ -129,15 +129,21 @@ export default function Login() {
       </div>
 
       {/* Left Artwork Side */}
-      <div className="hidden md:flex md:w-1/2 bg-gray-50 items-center justify-center relative overflow-hidden">
-        <img
+      <div
+        className="hidden md:flex md:w-1/2 bg-gray-50 items-center justify-center relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(147.22deg, rgba(235, 168, 50, 0.8) -1.46%, rgba(202, 102, 65, 0.8) 37.56%, rgba(215, 127, 59, 0.8) 67.32%, rgba(235, 168, 50, 0.8) 81.46%)",
+        }}
+      >
+        {/* <img
           src={palace}
           alt="Hawa Mahal"
           className="absolute inset-0 w-full h-full object-cover opacity-20"
-        />
+        /> */}
 
         <div className="relative z-10 flex flex-col items-center text-center p-6 md:p-8">
-          <div className="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white flex items-center justify-center">
+          <div className="w-424 h-36 md:w-200 md:h-48 rounded-xl shadow-4xl overflow-hidden border-4 border-white shadow-xl bg-white flex items-center justify-center">
             <img
               src={mandala}
               alt="Mandala"
@@ -146,13 +152,13 @@ export default function Login() {
           </div>
 
           {/* Logo */}
-          <img
+          {/* <img
             src={logo}
             alt="Rajasthan Pravasi Foundation"
             className="w-32 md:w-40 mt-6 drop-shadow-lg"
-          />
+          /> */}
 
-          <h2 className="mt-4 md:mt-6 text-xl md:text-2xl font-bold text-gray-800">
+          {/* <h2 className="mt-4 md:mt-6 text-xl md:text-2xl font-bold text-gray-800">
             Rajasthan Pravasi Foundation
           </h2>
           <p className="mt-2 text-gray-600 max-w-xs md:max-w-sm leading-relaxed">
@@ -160,7 +166,7 @@ export default function Login() {
             <span className="font-semibold text-green-600">culture</span>,{" "}
             <span className="font-semibold text-yellow-600">heritage</span> and{" "}
             <span className="font-semibold text-pink-600">community</span>.
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
