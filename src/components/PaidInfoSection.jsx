@@ -39,7 +39,9 @@ const successStories = [
 
 export default function PaidInfoSection() {
   return (
-    <section className="w-full relative">
+    <section 
+    className="w-full relative"
+    >
       {/* Left tree decoration */}
       <div className="relative z-10 max-w-[1220px] mx-auto">
         <div className="flex items-center justify-between relative">
