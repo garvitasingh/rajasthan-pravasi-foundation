@@ -64,7 +64,7 @@ export default function HomeBanner() {
             Learn More
           </button>
           <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-white text-orange-600 font-semibold hover:bg-gray-200 transition-all shadow-md">
-            Donate Now
+            Start Tour
           </button>
         </motion.div>
       </div>
