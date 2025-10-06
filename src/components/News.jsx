@@ -62,11 +62,11 @@ export default function NewsSection() {
         {/* Navigation Buttons */}
         <div className="flex justify-center items-center gap-6 mt-16">
           {/* Back Button */}
-          <button className="w-[106px] h-[68px] bg-gradient-to-r from-gray-100 to-gray-200 rounded-tl-sm rounded-tr-[30px] rounded-bl-sm rounded-br-[30px] flex items-center justify-center shadow-md hover:shadow-lg hover:scale-105 transition">
+          {/* <button className="w-[106px] h-[68px] bg-gradient-to-r from-gray-100 to-gray-200 rounded-tl-sm rounded-tr-[30px] rounded-bl-sm rounded-br-[30px] flex items-center justify-center shadow-md hover:shadow-lg hover:scale-105 transition">
             <h4 className="font-semibold text-lg text-gray-700 leading-none">
               BACK
             </h4>
-          </button>
+          </button> */}
 
           {/* View Button */}
           <button className="w-[175px] h-[68px] bg-gradient-to-r from-orange-500 to-orange-600 rounded-[40px] flex items-center justify-center text-white shadow-lg hover:shadow-2xl hover:scale-105 transition">
@@ -74,11 +74,11 @@ export default function NewsSection() {
           </button>
 
           {/* Next Button */}
-          <button className="w-[106px] h-[68px] bg-gradient-to-r from-gray-100 to-gray-200 rounded-tl-[30px] rounded-tr-sm rounded-bl-[30px] rounded-br-sm flex items-center justify-center shadow-md hover:shadow-lg hover:scale-105 transition">
+          {/* <button className="w-[106px] h-[68px] bg-gradient-to-r from-gray-100 to-gray-200 rounded-tl-[30px] rounded-tr-sm rounded-bl-[30px] rounded-br-sm flex items-center justify-center shadow-md hover:shadow-lg hover:scale-105 transition">
             <h4 className="font-semibold text-lg text-gray-700 leading-none">
               NEXT
             </h4>
-          </button>
+          </button> */}
         </div>
       </div>
     </section>

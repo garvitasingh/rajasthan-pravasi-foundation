@@ -63,9 +63,9 @@ export default function HomeBanner() {
           <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700 transition-all shadow-md">
             Learn More
           </button>
-          <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-white text-orange-600 font-semibold hover:bg-gray-200 transition-all shadow-md">
+          {/* <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-white text-orange-600 font-semibold hover:bg-gray-200 transition-all shadow-md">
             Start Tour
-          </button>
+          </button> */}
         </motion.div>
       </div>
 
@@ -75,14 +75,14 @@ export default function HomeBanner() {
         alt="Camel Left"
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
-        className="absolute bottom-6 left-10 w-12 sm:w-16 md:w-20 opacity-90"
+        className="absolute bottom-6 left-10 w-10 sm:w-12 md:w-18 opacity-90"
       />
       <motion.img
         src={camel_right_small}
         alt="Camel Right"
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 4, delay: 1 }}
-        className="absolute bottom-6 right-10 w-10 sm:w-14 md:w-18 opacity-90"
+        className="absolute bottom-6 right-10 w-10 sm:w-12 md:w-18 opacity-90"
       />
     </div>
   );

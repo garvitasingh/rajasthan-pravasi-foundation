@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import camelIcon from "../assets/camel_right_small.png";
+import rajasthaniBg from '../assets/hawa-mahal.png'; // Add this import for the new background
 
 const missionPoints = [
   {
@@ -47,9 +48,19 @@ const missionPoints = [
 
 export default function MissionSection() {
   return (
-    <section className="relative overflow-hidden py-20 px-6 sm:px-8 lg:px-12 rounded-t-[40px]">
+    <section 
+    className="relative overflow-hidden py-20 px-6 sm:px-8 lg:px-12 rounded-t-[40px]"
+    >
       {/* Gradient desert sky background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-orange-200 via-orange-400 to-[#DB580F]" />
+      <div 
+      className="absolute inset-0 bg-gradient-to-t from-orange-200 via-orange-400 to-[#DB580F]"
+      // style={{
+      //       backgroundImage: `url(${rajasthaniBg})`,
+      //       backgroundSize: 'cover',
+      //       backgroundPosition: 'center',
+      //       backgroundRepeat: 'no-repeat',
+      //     }}
+      />
 
       {/* Rising sun */}
       <motion.div
