@@ -46,9 +46,10 @@ export default function NewsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="mb-14 text-center">
-          <h2 className="text-4xl font-extrabold text-[#EF5C10] relative inline-block">
-            News & Updates
-            <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-[3px] bg-orange-500 rounded-full animate-pulse"></span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4">
+            <span className="bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+              News & Updates
+            </span>
           </h2>
         </div>
 
