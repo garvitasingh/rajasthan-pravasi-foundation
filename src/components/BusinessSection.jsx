@@ -1,5 +1,6 @@
 import mandalaBg from "../assets/mandala.png";
 import sampleImg from "../assets/building.png";
+import rajasthaniBg from "../assets/business_img.jpg";
 
 export default function FeaturedBusiness() {
     const businesses = [
@@ -31,6 +32,12 @@ export default function FeaturedBusiness() {
 
     return ( 
         <section className="w-full relative overflow-hidden">
+            <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${rajasthaniBg})`,
+                    }}
+                  />
             {/* <img
                 src={mandalaBg}
                 alt="mandala"

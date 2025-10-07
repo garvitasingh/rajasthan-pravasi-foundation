@@ -61,7 +61,7 @@ export default function HomeBanner() {
           className="mt-6 flex gap-4"
         >
           <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700 transition-all shadow-md">
-            Learn More
+            Join Us
           </button>
           {/* <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-white text-orange-600 font-semibold hover:bg-gray-200 transition-all shadow-md">
             Start Tour
@@ -70,7 +70,7 @@ export default function HomeBanner() {
       </div>
 
       {/* Floating Camels */}
-      <motion.img
+      {/* <motion.img
         src={camel_left}
         alt="Camel Left"
         animate={{ y: [0, -15, 0] }}
@@ -83,7 +83,7 @@ export default function HomeBanner() {
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 4, delay: 1 }}
         className="absolute bottom-6 right-10 w-10 sm:w-12 md:w-18 opacity-90"
-      />
+      /> */}
     </div>
   );
 }

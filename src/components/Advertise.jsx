@@ -49,7 +49,7 @@ export default function AdVideo() {
       >
         {/* 🔥 Section Header */}
         <div className="text-center mb-20">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -59,7 +59,7 @@ export default function AdVideo() {
             <span className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
               Featured Experience
             </span>
-          </motion.div>
+          </motion.div> */}
 
           <h2 className="text-5xl sm:text-6xl font-extrabold mb-4">
             <span className="bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
@@ -137,7 +137,7 @@ export default function AdVideo() {
           </motion.div>
 
           {/* Floating stats (Glassmorphism) */}
-          <motion.div
+          {/* <motion.div
             className="hidden lg:block absolute -left-24 top-1/3 bg-white/40 backdrop-blur-2xl rounded-2xl p-6 shadow-xl border border-white/20"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -152,9 +152,9 @@ export default function AdVideo() {
                 <div className="text-sm text-gray-700">Views</div>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
-          <motion.div
+          {/* <motion.div
             className="hidden lg:block absolute -right-24 bottom-1/3 bg-white/40 backdrop-blur-2xl rounded-2xl p-6 shadow-xl border border-white/20"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -169,11 +169,11 @@ export default function AdVideo() {
                 <div className="text-sm text-gray-700">Rating</div>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
 
         {/* 🔥 Bottom CTA */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
@@ -186,7 +186,7 @@ export default function AdVideo() {
           >
             Explore More Content
           </motion.button>
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </div>
   );
