@@ -1,11 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import foun1 from "../assets/foun1.png";
 import foun2 from "../assets/foun2.png";
 import foun3 from "../assets/foun3.png";
 import foun4 from "../assets/foun4.png";
 import foun5 from "../assets/foun5.png";
-import rajasthaniBg from "../assets/hawa-mahal.png";
+import rajasthaniBg from "../assets/person_img.jpg";
 
 const members = [
   {
@@ -48,47 +49,73 @@ const members = [
 const MemberCard = ({ member }) => {
   return (
     <motion.div
-      className="relative bg-white/80 backdrop-blur-md border border-orange-100/50 rounded-3xl shadow-xl overflow-hidden flex flex-col items-center text-center p-6 transition-all duration-300 hover:shadow-2xl hover:bg-white/95 hover:border-orange-300 w-[280px] sm:w-[300px] md:w-[340px] flex-shrink-0"
-      whileHover={{ scale: 1.05 }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-t from-orange-50/40 to-transparent opacity-60" />
+  className="relative bg-white/80 backdrop-blur-md border border-orange-100/50 rounded-3xl shadow-xl overflow-hidden flex flex-row items-center p-6 transition-all duration-300 hover:shadow-2xl hover:bg-white/95 hover:border-orange-300 flex-shrink-0 w-[100%] sm:w-[1%] md:w-[35%] lg:w-[45%]"
+  whileHover={{ scale: 1.05 }}
+>
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-50/40 to-transparent opacity-60" />
+      
+      {/* Image on the left */}
       <img
         src={member.image}
         alt={member.name}
-        className="w-full h-56 object-cover rounded-2xl mb-4 shadow-md transition-transform duration-300 hover:scale-105"
+        className="w-64 h-64 object-cover rounded-2xl shadow-md transition-transform duration-300 hover:scale-105 flex-shrink-0"
       />
-      <h3 className="text-xl font-semibold text-gray-900 z-10 relative">
-        {member.name}
-      </h3>
-      <span className="mt-2 inline-block bg-orange-500 text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-sm z-10 relative">
-        {member.role}
-      </span>
-      <p className="mt-3 text-sm text-gray-600 leading-relaxed z-10 relative">
-        {member.description}
-      </p>
+      
+      {/* Content on the right */}
+      <div className="ml-6 flex flex-col justify-center text-left flex-1">
+        <h3 className="text-lg font-semibold text-gray-900 z-10 relative">
+          {member.name}
+        </h3>
+        <span className="mt-2 inline-block bg-orange-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm z-10 relative w-fit">
+          {member.role}
+        </span>
+        <p className="mt-2 text-xs text-gray-600 leading-relaxed z-10 relative">
+          {member.description}
+        </p>
+      </div>
     </motion.div>
   );
 };
 
 const FoundationStructure = () => {
   const carouselRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollability = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const scroll = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.clientWidth;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+      setTimeout(checkScrollability, 300);
+    }
+  };
 
   return (
-    <section
-      className="py-24 min-h-screen flex items-center relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${rajasthaniBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section className="py-24 min-h-screen flex items-center relative overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm"
+        style={{
+          backgroundImage: `url(${rajasthaniBg})`,
+        }}
+      />
+      
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-transparent to-orange-900/10" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.h2
-          className="sm:text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-16 text-center tracking-tight"
+          className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-16 text-center tracking-tight"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -96,7 +123,7 @@ const FoundationStructure = () => {
           Rajasthan Pravasi Foundation Structure
         </motion.h2>
 
-        {/* Top Founder Section (same as your code) */}
+        {/* Top Founder Section */}
         <div className="grid md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] gap-12 items-start mb-20">
           <motion.div
             className="relative bg-white/80 backdrop-blur-md border border-orange-100/50 rounded-3xl shadow-xl p-6 text-center hover:shadow-2xl hover:bg-white/95 transition-all duration-300"
@@ -110,7 +137,7 @@ const FoundationStructure = () => {
             }}
             whileHover={{ scale: 1.05 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-50/40 to-transparent opacity-60" />
+            <div className="absolute rounded-3xl inset-0 bg-gradient-to-t from-orange-50/40 to-transparent opacity-60" />
             <img
               src={members[0].image}
               alt={members[0].name}
@@ -138,7 +165,7 @@ const FoundationStructure = () => {
               stiffness: 80,
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-50/30 to-transparent opacity-60" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-50/30 to-transparent opacity-60" />
             <h2 className="text-4xl font-bold text-gray-900 z-10 relative">
               Gyan Singh Rathore
             </h2>
@@ -157,16 +184,40 @@ const FoundationStructure = () => {
           </motion.div>
         </div>
 
-        {/* ✅ Carousel Section */}
-        <motion.div
-          ref={carouselRef}
-          className="overflow-x-scroll flex space-x-8 scrollbar-hide cursor-grab active:cursor-grabbing px-4"
-          whileTap={{ cursor: "grabbing" }}
-        >
-          {members.slice(1).map((member, index) => (
-            <MemberCard key={index} member={member} />
-          ))}
-        </motion.div>
+        {/* Horizontal Carousel Section - Shows 3 cards per frame */}
+        <div className="relative">
+          {/* Left Arrow */}
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-6 h-6 text-orange-600" />
+            </button>
+          )}
+
+          {/* Right Arrow */}
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-6 h-6 text-orange-600" />
+            </button>
+          )}
+
+          <motion.div
+            ref={carouselRef}
+            className="overflow-x-scroll flex gap-6 scrollbar-hide px-4"
+            onScroll={checkScrollability}
+          >
+            {members.slice(1).map((member, index) => (
+              <MemberCard key={index} member={member} />
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
