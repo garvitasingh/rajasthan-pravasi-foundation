@@ -49,7 +49,7 @@ const members = [
 const MemberCard = ({ member }) => {
   return (
     <motion.div
-  className="relative bg-white/80 backdrop-blur-md border border-orange-100/50 rounded-3xl shadow-xl overflow-hidden flex flex-row items-center p-6 transition-all duration-300 hover:shadow-2xl hover:bg-white/95 hover:border-orange-300 flex-shrink-0 w-[100%] sm:w-[1%] md:w-[35%] lg:w-[45%]"
+  className="relative bg-white/80 backdrop-blur-md border border-orange-100/50 rounded-3xl shadow-xl overflow-hidden flex flex-row items-center p-6 transition-all duration-300 hover:shadow-2xl hover:bg-white/95 hover:border-orange-300 flex-shrink-0 w-[100%] sm:w-[1%] md:w-[20%] lg:w-[32%]"
   whileHover={{ scale: 1.05 }}
 >
       <div className="absolute inset-0 bg-gradient-to-r from-orange-50/40 to-transparent opacity-60" />
