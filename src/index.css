@@ -141,3 +141,25 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+/* HomeBanner.css */
+.custom-dot {
+  width: 8px;
+  height: 8px;
+  background: #f97316; /* orange-500 */
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.slick-active .custom-dot {
+  transform: scale(1.25);
+}
+.slick-slider {
+  position: relative;
+  box-sizing: border-box;
+}
+.slick-list {
+  overflow: hidden;
+}
+.slick-track {
+  display: flex;
+}
