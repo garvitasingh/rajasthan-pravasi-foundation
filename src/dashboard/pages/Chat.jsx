@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSocket } from "../../context/SocketContext";
 
 const threads = new Array(8).fill(0).map((_, i) => ({
   id: i,
@@ -9,6 +10,31 @@ const threads = new Array(8).fill(0).map((_, i) => ({
 }));
 
 export default function Chat() {
+
+  const socket = useSocket();
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    if (!socket) return;
+
+    // Listen for incoming messages
+    socket.on("online-users", (data) => {
+      console.log(data, "data")
+      setMessages((prev) => [...prev, data]);
+    });
+
+    // Cleanup
+    return () => socket.off("online-users");
+  }, [socket]);
+
+  const sendMessage = () => {
+    if (text.trim()) {
+      socket.emit("send_message", { text, time: new Date().toLocaleTimeString() });
+      setText("");
+    }
+  };
+
   return (
     <div className="space-y-4"> 
       <h2 className="text-xl font-semibold">Messaging</h2>

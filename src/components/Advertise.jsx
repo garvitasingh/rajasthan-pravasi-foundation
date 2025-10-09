@@ -49,17 +49,6 @@ export default function AdVideo() {
       >
         {/* 🔥 Section Header */}
         <div className="text-center mb-20">
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-orange-500/10 to-pink-500/10 backdrop-blur-xl rounded-full border border-orange-200/40 mb-6 shadow-lg"
-          >
-            <Sparkles className="w-4 h-4 text-orange-500 animate-pulse" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
-              Featured Experience
-            </span>
-          </motion.div> */}
 
           <h2 className="text-5xl sm:text-6xl font-extrabold mb-4">
             <span className="bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
