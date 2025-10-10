@@ -49,61 +49,65 @@ export default function HomeBanner() {
     <div className="relative w-full h-[500px] sm:h-[600px] overflow-hidden">
       <Slider {...settings} className="relative h-full custom-slider">
         {bannerImages.map((img, index) => (
-          <div key={index} className="relative h-[500px] sm:h-[600px]">
-            {/* Background Image */}
-            <img
-              src={img}
-              alt={`Banner ${index + 1}`}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+  <div key={index} className="relative h-[500px] sm:h-[600px]">
+    {/* Background Image */}
+    <img
+      src={img}
+      alt={`Banner ${index + 1}`}
+      className="absolute inset-0 w-full h-full object-cover"
+    />
 
-            {/* Animated gradient overlay */}
-            <motion.div
-              animate={{
-                background: [
-                  "linear-gradient(120deg, rgba(255,165,0,0.5), rgba(255,69,0,0.5))",
-                  "linear-gradient(120deg, rgba(255,140,0,0.5), rgba(255,20,147,0.5))",
-                  "linear-gradient(120deg, rgba(0,128,255,0.5), rgba(255,140,0,0.5))",
-                ],
-              }}
-              transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-              className="absolute inset-0 mix-blend-multiply"
-            />
+    {/* 🔹 Black Overlay for Opacity */}
+    <div className="absolute inset-0 bg-black/20 z-10" />
 
-            {/* Centered Content */}
-            <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6">
-              <motion.h1
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg"
-              >
-                Welcome to Rajasthan Pravasi Foundation
-              </motion.h1>
+    {/* Animated gradient overlay (optional, above image but below content) */}
+    <motion.div
+      animate={{
+        background: [
+          "linear-gradient(120deg, rgba(255,165,0,0.5), rgba(255,69,0,0.5))",
+          "linear-gradient(120deg, rgba(255,140,0,0.5), rgba(255,20,147,0.5))",
+          "linear-gradient(120deg, rgba(0,128,255,0.5), rgba(255,140,0,0.5))",
+        ],
+      }}
+      transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+      className="absolute inset-0 mix-blend-multiply z-10"
+    />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 1 }}
-                className="mt-4 max-w-2xl text-sm sm:text-lg md:text-xl text-gray-100 leading-relaxed"
-              >
-                Empowering the community with culture, heritage, and innovation.  
-                Join us in preserving Rajasthan’s vibrant legacy while shaping a brighter future.
-              </motion.p>
+    {/* Centered Content */}
+    <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6">
+      <motion.h1
+        initial={{ y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg"
+      >
+        Welcome to Rajasthan Pravasi Foundation
+      </motion.h1>
 
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="mt-6 flex gap-4"
-              >
-                <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700 transition-all shadow-md">
-                  Join Us
-                </button>
-              </motion.div>
-            </div>
-          </div>
-        ))}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 1 }}
+        className="mt-4 max-w-2xl text-sm sm:text-lg md:text-xl text-gray-100 leading-relaxed"
+      >
+        Empowering the community with culture, heritage, and innovation.  
+        Join us in preserving Rajasthan’s vibrant legacy while shaping a brighter future.
+      </motion.p>
+
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1, duration: 0.8 }}
+        className="mt-6 flex gap-4"
+      >
+        <button className="px-5 py-2 sm:px-6 sm:py-3 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700 transition-all shadow-md">
+          Join Us
+        </button>
+      </motion.div>
+    </div>
+  </div>
+))}
+
       </Slider>
 
       {/* Add custom styles for active dot */}

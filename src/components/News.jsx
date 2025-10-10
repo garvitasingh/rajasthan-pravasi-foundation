@@ -88,7 +88,7 @@ export default function NewsSection() {
 
         {/* View Button */}
         <div className="flex justify-center items-center mt-16">
-          <button className="w-[175px] h-[68px] bg-gradient-to-r from-orange-500 to-orange-600 rounded-[40px] flex items-center justify-center text-white shadow-lg hover:shadow-2xl hover:scale-105 transition">
+          <button className="w-[175px] h-[60px] bg-gradient-to-r from-orange-500 to-orange-600 rounded-[20px] flex items-center justify-center text-white shadow-lg hover:shadow-2xl hover:scale-105 transition">
             <h4 className="font-semibold text-lg leading-none">VIEW</h4>
           </button>
         </div>

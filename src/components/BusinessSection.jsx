@@ -116,6 +116,7 @@ export default function FeaturedBusiness() {
                 height: "58px",
                 // borderRadius: "30px 2px 30px 2px",
                 boxShadow: "0px 0px 20px 10px rgba(249, 115, 22, 0.2)",
+                borderRadius: "30px 5px 30px 5px"
               }}
             >
               VIEW ALL BUSINESS
