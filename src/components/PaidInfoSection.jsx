@@ -285,7 +285,7 @@ export default function PaidInfoSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="relative group/btn px-10 py-5 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white font-black rounded-full shadow-2xl overflow-hidden"
-            style={{ borderRadius: "30px 5px 30px 5px" }}
+            style={{ borderRadius: "5px 30px 5px 30px" }}
           >
             {/* Animated shine */}
             <motion.div

@@ -48,8 +48,8 @@ const missionPoints = [
 
 export default function MissionSection() {
   return (
-    <section 
-    className="relative overflow-hidden py-20 px-6 sm:px-8 lg:px-12 rounded-[40px]"
+    <section
+    className="relative overflow-hidden py-20 px-6 sm:px-8 lg:px-12"
     >
       {/* Gradient desert sky background */}
       <div 
