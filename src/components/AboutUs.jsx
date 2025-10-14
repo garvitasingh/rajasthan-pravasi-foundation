@@ -2,6 +2,7 @@ import foun1 from "../assets/Frame 16.png"
 import foun2 from "../assets/Frame 17.png"
 import foun3 from "../assets/Frame 18.png"
 import foun4 from "../assets/Frame 19.png"
+import FoundationStructure from "./Person";
 
 const stats = [
   { value: "1,00,000+", label: "Pravasi Engaged Since 2015", color: "#EDA536" },
@@ -82,6 +83,8 @@ const AboutUs = () => {
           untimely passing.
         </p>
       </section>
+       
+      
 
       {/* Chapters Stats */}
       <section 
@@ -158,6 +161,7 @@ const AboutUs = () => {
         </div>
       </div>
     </section>
+    <FoundationStructure/>
     </div>
   );
 };

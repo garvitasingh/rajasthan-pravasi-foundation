@@ -1,33 +1,83 @@
 // src/components/Navbar.jsx
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
+import { HiOutlineBars3, HiOutlineXMark, HiChevronDown } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Info, Image, Phone, HelpCircle, Camera } from "lucide-react"; 
+import { Home, Info, Image, Phone, HelpCircle, Camera, ListTodo } from "lucide-react";
 import logo from "../assets/logo2.png";
 
 export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+
+  // Yeh array batata hai ki kin pages par Activities tab active dikhe
+  const activitiesPaths = [
+    "/activities",
+    "/pravasi-sambal-yojana",
+    "/initiatives",
+    "/investment-sectors"   
+  ];
 
   const navItems = [
     { label: "Home", path: "/", icon: <Home size={18} /> },
     { label: "About Us", path: "/about", icon: <Info size={18} /> },
     { label: "Gallery", path: "/gallery", icon: <Image size={18} /> },
     { label: "Media & Blog", path: "/media-blog", icon: <Camera size={18} /> },
+   
     { label: "Contact", path: "/contact", icon: <Phone size={18} /> },
     { label: "FAQ", path: "/faq", icon: <HelpCircle size={18} /> },
+    
+    { label: "Our Roots", path: "/our-roots", icon: <Info size={18} /> },
+  
   ];
-
-  const linkCls = (path) =>
+  // Function to determine if a link is active
+  // Activities ke liye alag logic hai kyunki uske multiple sub-pages hain
+  const linkCls = (path, isActivities) =>
     `relative flex items-center gap-2 pb-1 transition-colors duration-200 ${
-      location.pathname === path
-        ? "font-semibold md:after:content-[''] md:after:absolute md:after:left-0 md:after:bottom-0 md:after:w-full md:after:h-[2px] md:after:bg-black md:after:rounded-full"
-        : "opacity-90 hover:opacity-100"
+      (isActivities
+        ? activitiesPaths.includes(location.pathname)
+        : location.pathname === path)
+        ? "font-semibold text-[#DB580F] md:after:content-[''] md:after:absolute md:after:left-0 md:after:bottom-0 md:after:w-full md:after:h-[2px] md:after:bg-[#DB580F] md:after:rounded-full"
+        : "opacity-90 hover:opacity-100 text-black"
     }`;
 
+  // Activities dropdown items
+  const activitiesDropdown = [
+    {
+      label: "Activities of RPF",
+      path: "/activities",
+      type: "internal",
+    },
+    {
+      label: "Pravasi Sambal Yojana",
+      path: "/pravasi-sambal-yojana",
+      type: "internal",
+    },
+    {
+      label: "Rajasthan Govt. Initiatives",
+      path: "/initiatives",
+      type: "internal",
+    },
+    {
+      label: "Explore Investment Sectors in Rajasthan",    
+      path: "/investment-sectors",                        
+      type: "internal",
+    },
+    {
+      label: "Rising Rajasthan",
+      path: "https://rising.rajasthan.gov.in/",
+      type: "external",
+    },
+    {
+      label: "Pravasi Divas",
+      path: "https://rising.rajasthan.gov.in/pravasi-divas",
+      type: "external",
+    },
+  ];
+
   return (
-    <nav className="w-full px-4 sm:px-6 md:px-12 py-3 md:py-2 flex items-center justify-between z-30 relative shadow-lg bg-white">
+    <nav className="w-full px-3 sm:px-4 md:px-10 py-3 md:py-2 flex items-center justify-between z-30 relative shadow-lg bg-white">
       {/* Logo */}
       <Link to="/" className="flex items-center gap-2 active:scale-105">
         <img
@@ -38,15 +88,18 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-6">
-        {navItems.map((item) => (
+      
+      
+      <div className="hidden md:flex ml-10 items-center gap-6">
+
+        
+        {navItems.slice(0, 7).map((item) => (
           <Link
             key={item.label}
             to={item.path}
             className={`text-black ${linkCls(item.path)} flex items-center gap-2`}
           >
             {item.icon}
-            {/* Text flip animation */}
             <span className="relative overflow-hidden h-6 group">
               <span className="block group-hover:-translate-y-full transition-transform duration-300">
                 {item.label}
@@ -57,6 +110,88 @@ export default function Navbar() {
             </span>
           </Link>
         ))}
+
+        {/* Activities Dropdown (hover) */}
+        <div
+          className="relative group"
+          onMouseEnter={() => setDropdown(true)}
+          onMouseLeave={() => setDropdown(false)}
+        >
+          <button
+            className={`flex items-center gap-2 text-black font-semibold px-2 py-1 rounded-md transition-colors duration-200 ${
+              dropdown ? "bg-orange-50" : ""
+            } ${linkCls("/activities", true)}`}
+            style={{ background: "none", border: "none", outline: "none" }}
+          >
+            <ListTodo size={18} className={location.pathname === "/activities" ? "text-[#DB580F]" : "text-black"} />
+            <span className="relative overflow-hidden h-6 group">
+              <span className="block group-hover:-translate-y-full transition-transform duration-300">
+                Activities
+              </span>
+              <span className="block absolute top-full left-0 group-hover:-translate-y-full transition-transform duration-300">
+                Activities
+              </span>
+            </span>
+            <HiChevronDown
+              size={18}
+              className={`transition-transform duration-300 ${dropdown ? "rotate-180" : ""}`}
+            />
+          </button>
+          <AnimatePresence>
+            {dropdown && (
+              <motion.ul
+                initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.98 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-orange-100 z-50 py-2"
+              >
+                {activitiesDropdown.map((item) =>
+                  item.type === "external" ? (
+                    <li key={item.label}>
+                      <a
+                        href={item.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-[#DB580F] transition-colors duration-200 font-medium"
+                      >
+                        {item.label}
+                        <svg
+                          className="ml-2 w-4 h-4 text-orange-400"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17 7l-10 10M17 17V7H7"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  ) : (
+                    <li key={item.label}>
+                      <Link
+                        to={item.path}
+                        className="flex items-center px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-[#DB580F] transition-colors duration-200 font-medium"
+                        onClick={() => setDropdown(false)}
+                      >
+                        {item.label}
+                        {(item.label === "Activities of RPF" || item.label === "Pravasi Sambal Yojana") && (
+                          <span className="ml-2 text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-semibold">
+                            New
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* Buttons */}
         <Link
@@ -118,6 +253,7 @@ export default function Navbar() {
               </button>
 
               <div className="flex flex-col pt-16 px-6">
+                {/* Mobile nav items */}
                 {navItems.map((item) => (
                   <Link
                     key={item.label}
@@ -131,6 +267,46 @@ export default function Navbar() {
                     {item.label}
                   </Link>
                 ))}
+
+                {/* Activities Dropdown for mobile */}
+                <div className="mt-2">
+                  <div className="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                    <ListTodo size={18} className="text-[#DB580F]" />
+                    Activities
+                  </div>
+                  <ul>
+                    {activitiesDropdown.map((item) =>
+                      item.type === "external" ? (
+                        <li key={item.label}>
+                          <a
+                            href={item.path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block px-4 py-2 text-gray-800 hover:bg-orange-50 hover:text-[#DB580F] rounded transition"
+                            onClick={() => setOpen(false)}
+                          >
+                            {item.label}
+                          </a>
+                        </li>
+                      ) : (
+                        <li key={item.label}>
+                          <Link
+                            to={item.path}
+                            className="block px-4 py-2 text-gray-800 hover:bg-orange-50 hover:text-[#DB580F] rounded transition"
+                            onClick={() => setOpen(false)}
+                          >
+                            {item.label}
+                            {(item.label === "Activities of RPF" || item.label === "Pravasi Sambal Yojana") && (
+                              <span className="ml-2 text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-semibold">
+                                New
+                              </span>
+                            )}
+                          </Link>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
 
                 <div className="border-t my-4" />
 

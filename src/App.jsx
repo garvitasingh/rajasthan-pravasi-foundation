@@ -32,6 +32,11 @@ import { Toaster } from "react-hot-toast";
 import { AppContextProvider } from "./context/AppContext";
 import Navbar from "./components/Navbar";
 import MediaBlog from "./pages/MediaBlog";
+import OurRoots from "./components/OurRoots";
+import Activities from "./pages/Activities";
+import PravasiSambalYojana from "./pages/PravasiSambalYojana";
+import Initiatives from "./pages/Initiatives";
+import InvestmentSectors from "./pages/InvestmentSectors";  
 
 export default function AppWrapper() {
   return (
@@ -44,7 +49,19 @@ export default function AppWrapper() {
 }
 
 // ✅ Routes where Navbar should be visible
-const navbarRoutes = ["/", "/about", "/gallery", "/contact", "/media-blog", "/faq"];
+const navbarRoutes = [
+  "/",
+  "/about",
+  "/gallery",
+  "/contact",
+  "/media-blog",
+  "/faq",
+  "/our-roots",
+  "/activities",              // <-- add
+  "/pravasi-sambal-yojana",   // <-- add
+  "/initiatives",             // <-- add
+  "/investment-sectors", // <-- Add this
+];
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -116,7 +133,15 @@ function AnimatedRoutes() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="membership" element={<Membership />} />
           <Route path="settings" element={<Settings />} />
+          
         </Route>
+
+        {/* Additional Route */}
+        <Route path="/our-roots" element={<OurRoots />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/pravasi-sambal-yojana" element={<PravasiSambalYojana />} />
+        <Route path="/initiatives" element={<Initiatives />} />
+        <Route path="/investment-sectors" element={<InvestmentSectors />} />
 
         {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/home" replace />} />
