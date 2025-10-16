@@ -1,37 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import mandalaBg from "../assets/mandala.png";
 import GradientButton from "../components/GradientButton";
-
-const faqs = [
-  {
-    question: "What Is Your Return Policy?",
-    answer:
-      "We offer a 7-day return policy for unused items in original packaging.",
-  },
-  {
-    question: "Do You Provide International Shipping?",
-    answer: "Yes, we ship worldwide. Charges depend on the destination.",
-  },
-  {
-    question: "How Can I Contact Customer Support?",
-    answer: "Email us at support@example.com or call +91-9876543210.",
-  },
-  {
-    question: "Do You Offer Custom Products?",
-    answer: "Yes, we can customize certain products. Contact us for details.",
-  },
-  {
-    question: "How Long Does Delivery Take?",
-    answer: "Typically 5-7 business days in India, 10-15 internationally.",
-  },
-];
+import { getFaqs } from "../api/faqApi";
+import Loader from "../common/Loader";
 
 export default function FaqContent() {
+  const [faqs, setFaqs] = useState([]);
   const [openIndex, setOpenIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const result = await getFaqs();
+        if (result.success && Array.isArray(result.data)) {
+          setFaqs(result.data);
+        } else {
+          setFaqs([]);
+        }
+      } catch (err) {
+        setError("Failed to load FAQs. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFaqs();
+  }, []);
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col justify-center items-center py-10 px-4">
@@ -59,33 +66,37 @@ export default function FaqContent() {
 
         {/* FAQ Content */}
         <div className="relative z-10 divide-y divide-gray-200">
-          {faqs.map((faq, index) => (
-            <div key={index} className="py-5">
-              {/* Question Row */}
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="flex items-center justify-between w-full text-left"
-              >
-                <span className="font-semibold text-gray-800 text-lg hover:text-orange-600 transition-colors">
-                  {faq.question}
-                </span>
-                <span className="flex items-center justify-center w-8 h-8 border border-orange-500 rounded-full text-orange-500 font-bold text-xl">
-                  {openIndex === index ? "−" : "+"}
-                </span>
-              </button>
+          {error ? (
+            <div className="text-center text-red-500 py-8">{error}</div>
+          ) : (
+            faqs.map((faq, index) => (
+              <div key={faq._id || index} className="py-5">
+                {/* Question Row */}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="flex items-center justify-between w-full text-left"
+                >
+                  <span className="font-semibold text-gray-800 text-lg hover:text-orange-600 transition-colors">
+                    {faq.question}
+                  </span>
+                  <span className="flex items-center justify-center w-8 h-8 border border-orange-500 rounded-full text-orange-500 font-bold text-xl">
+                    {openIndex === index ? "−" : "+"}
+                  </span>
+                </button>
 
-              {/* Answer */}
-              <div
-                className={`mt-3 text-gray-600 text-base leading-relaxed transition-all duration-300 ease-in-out ${
-                  openIndex === index
-                    ? "max-h-40 opacity-100"
-                    : "max-h-0 opacity-0 overflow-hidden"
-                }`}
-              >
-                {faq.answer}
+                {/* Answer */}
+                <div
+                  className={`mt-3 text-gray-600 text-base leading-relaxed transition-all duration-300 ease-in-out ${
+                    openIndex === index
+                      ? "max-h-40 opacity-100"
+                      : "max-h-0 opacity-0 overflow-hidden"
+                  }`}
+                >
+                  {faq.answer}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {/* Button at bottom */}

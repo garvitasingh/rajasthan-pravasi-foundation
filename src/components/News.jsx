@@ -1,41 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import buildingImg from "../assets/building.png";
+import { getNews } from "../api/newsApi";
+
+const IMAGE_BASE_URL = "http://31.97.231.85:2700";
 
 export default function NewsSection() {
   const [selectedNews, setSelectedNews] = useState(null);
+  const [newsData, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const newsData = [
-    {
-      id: 1,
-      title: "Rajasthan High Court Issues Major Crime Verdict",
-      date: "12 JULY, 2025",
-      tag: "CRIME",
-      content: `The Rajasthan High Court has issued a major verdict related to organized crime...
-      This decision is expected to set a strong precedent for future cases in the state.
-      Detailed judgment mentions reforms in district-level investigations.
-      This case, spanning over 3 years, involved multiple agencies and has drawn public attention.`,
-      image: buildingImg,
-    },
-    {
-      id: 2,
-      title: "Udaipur Police Cracks Smuggling Case",
-      date: "20 AUGUST, 2025",
-      tag: "CRIME",
-      content: `Udaipur police have successfully cracked a high-profile smuggling case involving rare artifacts...
-      The accused were caught during a night raid in the outskirts of Udaipur.`,
-      image: buildingImg,
-    },
-    {
-      id: 3,
-      title: "Jaipur Cyber Crime Unit Busts Fraud Network",
-      date: "5 SEPTEMBER, 2025",
-      tag: "CRIME",
-      content: `Jaipur cybercrime unit has uncovered an interstate network running fake online job scams.
-      Over 20 people have been arrested and multiple bank accounts frozen.`,
-      image: buildingImg,
-    },
-  ];
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const result = await getNews();
+        if (result.success && Array.isArray(result.data)) {
+          setNewsData(result.data);
+        } else {
+          setNewsData([]);
+        }
+      } catch (err) {
+        setError("Failed to load news. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  // Helper to format date
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   return (
     <section className="w-full py-20 relative overflow-hidden bg-gradient-to-br from-orange-50 via-white to-orange-100">
@@ -55,35 +58,59 @@ export default function NewsSection() {
 
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {newsData.map((news) => (
-            <div
-              key={news.id}
-              className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl hover:border hover:border-orange-400"
-            >
-              <img
-                src={news.image}
-                alt="News"
-                className="w-full h-[220px] object-cover rounded-t-2xl"
-              />
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900">{news.title}</h3>
-                <p className="text-xs text-gray-500 mt-1 tracking-wide">{news.date}</p>
-                <p className="mt-4 text-gray-600 text-sm leading-relaxed line-clamp-4">
-                  {news.content}
-                </p>
+          {loading ? (
+            <div className="col-span-full text-center text-gray-700 py-8">
+              Loading news...
+            </div>
+          ) : error ? (
+            <div className="col-span-full text-center text-red-500 py-8">
+              {error}
+            </div>
+          ) : newsData.length === 0 ? (
+            <div className="col-span-full text-center text-gray-700 py-8">
+              No news available.
+            </div>
+          ) : (
+            newsData.map((news) => (
+              <div
+                key={news._id}
+                className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl hover:border hover:border-orange-400"
+              >
+                <img
+                  src={
+                    news.image?.startsWith("http")
+                      ? news.image
+                      : news.image
+                      ? `${IMAGE_BASE_URL}${news.image}`
+                      : buildingImg
+                  }
+                  alt="News"
+                  className="w-full h-[220px] object-cover rounded-t-2xl"
+                />
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {news.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1 tracking-wide">
+                    {formatDate(news.date)}
+                  </p>
+                  <p className="mt-4 text-gray-600 text-sm leading-relaxed line-clamp-4">
+                    {news.about}
+                  </p>
 
-                {/* Tag */}
-                <div className="mt-5">
-                  <button
-                    onClick={() => setSelectedNews(news)}
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
-                  >
-                    {news.tag}
-                  </button>
+                  {/* Tag */}
+                  <div className="mt-5">
+                    <button
+                      onClick={() => setSelectedNews(news)}
+                      className="bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
+                    >
+                      {(news.category || "GENERAL").toUpperCase()}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {/* View Button */}
@@ -117,13 +144,23 @@ export default function NewsSection() {
 
             <div className="p-6 space-y-4">
               <img
-                src={selectedNews.image}
+                src={
+                  selectedNews.image?.startsWith("http")
+                    ? selectedNews.image
+                    : selectedNews.image
+                    ? `${IMAGE_BASE_URL}${selectedNews.image}`
+                    : buildingImg
+                }
                 alt={selectedNews.title}
                 className="w-full h-[250px] object-cover rounded-xl"
               />
-              <h2 className="text-2xl font-semibold text-gray-800">{selectedNews.title}</h2>
-              <p className="text-sm text-gray-500">{selectedNews.date}</p>
-              <p className="text-gray-700 leading-relaxed">{selectedNews.content}</p>
+              <h2 className="text-2xl font-semibold text-gray-800">
+                {selectedNews.title}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {formatDate(selectedNews.date)}
+              </p>
+              <p className="text-gray-700 leading-relaxed">{selectedNews.about}</p>
             </div>
           </motion.div>
         )}

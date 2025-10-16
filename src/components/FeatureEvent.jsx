@@ -1,43 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Calendar, Users } from "lucide-react";
 
 import mandalaBg from "../assets/mandala.png";
 import sampleImg from "../assets/Frame 20.png";
+import { getFeaturedEvents } from "../api/featureEventsApi";
+
+const IMAGE_BASE_URL = "http://31.97.231.85:2700";
 
 export default function FeaturedEvent() {
-  const businesses = [
-    {
-      name: "SHRI RIDDHI PROPERTIES",
-      category: "REAL ESTATE AGENTS",
-      description:
-        "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-      location: "Gurgaon, Haryana",
-      image: sampleImg,
-      date: "Dec 15, 2025",
-      attendees: "250+",
-    },
-    {
-      name: "SHRI RIDDHI PROPERTIES",
-      category: "REAL ESTATE AGENTS",
-      description:
-        "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-      location: "Gurgaon, Haryana",
-      image: sampleImg,
-      date: "Dec 18, 2025",
-      attendees: "180+",
-    },
-    {
-      name: "SHRI RIDDHI PROPERTIES",
-      category: "REAL ESTATE AGENTS",
-      description:
-        "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-      location: "Gurgaon, Haryana",
-      image: sampleImg,
-      date: "Dec 22, 2025",
-      attendees: "320+",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const result = await getFeaturedEvents();
+        if (result.success && Array.isArray(result.data)) {
+          setEvents(result.data);
+        } else {
+          setEvents([]);
+        }
+      } catch (err) {
+        setError("Failed to load events. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  // Helper to format date (optional, fallback to raw string if not present)
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
 
   return (
     <section className="w-full relative overflow-hidden bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 py-20">
@@ -159,102 +162,111 @@ export default function FeaturedEvent() {
           >
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-12">
-              {businesses.map((biz, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group relative"
-                >
-                  {/* Card glow effect */}
+              {loading ? (
+                <div className="col-span-full text-center text-gray-700 py-8">Loading events...</div>
+              ) : error ? (
+                <div className="col-span-full text-center text-red-500 py-8">{error}</div>
+              ) : events.length === 0 ? (
+                <div className="col-span-full text-center text-gray-700 py-8">No events available.</div>
+              ) : (
+                events.map((event, i) => (
                   <motion.div
-                    className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-pink-400 rounded-[32px] opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"
-                  />
-
-                  <div
-                    className="relative bg-white shadow-lg overflow-hidden h-full flex flex-col"
-                    style={{
-                      borderRadius: "30px 2px 30px 2px",
-                      boxShadow: "0 10px 40px rgba(0, 0, 0, 0.08)",
-                    }}
+                    key={event._id || i}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    whileHover={{ y: -10 }}
+                    className="group relative"
                   >
-                    {/* Image with overlay */}
-                    <div className="relative overflow-hidden h-52">
-                      <motion.img
-                        src={biz.image}
-                        alt={biz.name}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                        style={{ borderRadius: "28px 0 0 0" }}
-                      />
-                      
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
-                      {/* Date badge */}
-                      <motion.div
-                        initial={{ x: -20, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg flex items-center gap-2"
-                      >
-                        <Calendar className="w-3 h-3 text-orange-500" />
-                        <span className="text-xs font-bold text-gray-800">{biz.date}</span>
-                      </motion.div>
+                    {/* Card glow effect */}
+                    <motion.div
+                      className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-pink-400 rounded-[32px] opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"
+                    />
 
-                      {/* Attendees badge */}
-                      <motion.div
-                        initial={{ x: 20, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        className="absolute top-4 right-4 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full shadow-lg flex items-center gap-1"
-                      >
-                        <Users className="w-3 h-3 text-white" />
-                        <span className="text-xs font-bold text-white">{biz.attendees}</span>
-                      </motion.div>
-                    </div>
+                    <div
+                      className="relative bg-white shadow-lg overflow-hidden h-full flex flex-col"
+                      style={{
+                        borderRadius: "30px 2px 30px 2px",
+                        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.08)",
+                      }}
+                    >
+                      {/* Image with overlay */}
+                      <div className="relative overflow-hidden h-52">
+                        <motion.img
+                          src={
+                            event.image?.startsWith("http")
+                              ? event.image
+                              : event.image
+                              ? `${IMAGE_BASE_URL}${event.image}`
+                              : sampleImg
+                          }
+                          alt={event.title}
+                          className="w-full h-full object-cover"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                          style={{ borderRadius: "28px 0 0 0" }}
+                        />
 
-                    {/* Content */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      <div className="mb-2">
-                        <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs font-bold rounded-full">
-                          {biz.category}
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-lg font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
-                        {biz.name}
-                      </h3>
-                      
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-1">
-                        {biz.description}
-                      </p>
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                      {/* Footer */}
-                      <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-bold px-5 py-2 rounded-full shadow-md hover:shadow-lg transition-shadow flex items-center gap-2"
+                        {/* Date badge */}
+                        <motion.div
+                          initial={{ x: -20, opacity: 0 }}
+                          whileInView={{ x: 0, opacity: 1 }}
+                          className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg flex items-center gap-2"
                         >
-                          READ
-                          <ArrowRight className="w-3 h-3" />
-                        </motion.button>
-                        
-                        <div className="flex items-center gap-1 text-gray-700 text-xs font-bold">
-                          <MapPin className="w-4 h-4 text-orange-500" />
-                          <span>{biz.location}</span>
+                          <Calendar className="w-3 h-3 text-orange-500" />
+                          <span className="text-xs font-bold text-gray-800">
+                            {formatDate(event.createdAt)}
+                          </span>
+                        </motion.div>
+
+                        {/* Attendees badge (optional, if you have attendees field) */}
+                        {/* <motion.div ... /> */}
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6 flex-1 flex flex-col">
+                        <div className="mb-2">
+                          <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs font-bold rounded-full">
+                            {event.subtitle || "EVENT"}
+                          </span>
+                        </div>
+
+                        <h3 className="text-lg font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                          {event.title}
+                        </h3>
+
+                        <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-1">
+                          {event.about}
+                        </p>
+
+                        {/* Footer */}
+                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-bold px-5 py-2 rounded-full shadow-md hover:shadow-lg transition-shadow flex items-center gap-2"
+                          >
+                            READ
+                            <ArrowRight className="w-3 h-3" />
+                          </motion.button>
+
+                          <div className="flex items-center gap-1 text-gray-700 text-xs font-bold">
+                            <MapPin className="w-4 h-4 text-orange-500" />
+                            <span>{event.place}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Decorative corner accent */}
-                    <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-orange-500/10 to-transparent rounded-tl-3xl" />
-                  </div>
-                </motion.div>
-              ))}
+                      {/* Decorative corner accent */}
+                      <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-orange-500/10 to-transparent rounded-tl-3xl" />
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </div>
 
             {/* View All Button */}
@@ -277,7 +289,7 @@ export default function FeaturedEvent() {
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
-                
+
                 <span className="relative z-10">VIEW ALL ARTICLES</span>
                 <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
               </motion.button>

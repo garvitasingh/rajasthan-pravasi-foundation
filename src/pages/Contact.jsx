@@ -1,7 +1,6 @@
+import React, { useState } from "react";
 import PageLayout from "../components/PageLayout";
 import bgImage from "../assets/hawa-mahal.png";
-
-import React from "react";
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
@@ -13,8 +12,41 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import mandalaBg from "../assets/mandala.png";
 import GradientButton from "../components/GradientButton";
+import { sendContactMessage } from "../api/contactApi";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState({ type: "", message: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFeedback({ type: "", message: "" });
+    setLoading(true);
+    try {
+      const res = await sendContactMessage(form);
+      if (res.success) {
+        setFeedback({ type: "success", message: "Message sent successfully!" });
+        setForm({ name: "", email: "", phone: "", message: "" });
+      } else {
+        setFeedback({ type: "error", message: "Failed to send message." });
+      }
+    } catch (err) {
+      setFeedback({ type: "error", message: "Failed to send message. Please try again." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <PageLayout bgImage={bgImage}>
       <div className="flex flex-col justify-center items-center py-10 px-4 md:px-8">
@@ -106,15 +138,19 @@ export default function Contact() {
             </div>
 
             {/* Right: Contact Form */}
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Name / नाम
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
                   placeholder="Enter your name"
                   className="mt-2 w-full border rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-orange-400 outline-none transition"
+                  required
                 />
               </div>
 
@@ -124,8 +160,12 @@ export default function Contact() {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
                   className="mt-2 w-full border rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-orange-400 outline-none transition"
+                  required
                 />
               </div>
 
@@ -135,8 +175,12 @@ export default function Contact() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
                   placeholder="Enter your number"
                   className="mt-2 w-full border rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-orange-400 outline-none transition"
+                  required
                 />
               </div>
 
@@ -145,29 +189,72 @@ export default function Contact() {
                   Message / संदेश
                 </label>
                 <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
                   placeholder="अपना संदेश लिखें"
                   rows="4"
                   className="mt-2 w-full border rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-orange-400 outline-none transition"
+                  required
                 ></textarea>
               </div>
 
+              {/* Feedback Message */}
+              {feedback.message && (
+                <div
+                  className={`text-center py-2 rounded ${
+                    feedback.type === "success"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {feedback.message}
+                </div>
+              )}
+
               <button
+                type="submit"
+                disabled={loading}
                 width="100%"
                 height="55px"
                 borderRadius="8px 30px 8px 30px"
-                className="w-[400px] h-[50px] bg-[#EF5A0F] rounded-[40px] text-white"
+                className={`w-[400px] h-[50px] bg-[#EF5A0F] rounded-[40px] text-white flex items-center justify-center ${
+                  loading ? "opacity-60 cursor-not-allowed" : ""
+                }`}
               >
-                <h4
-                  style={{
-                    lineHeight: 1,
-                    fontWeight: 600,
-                    fontSize: "20px",
-                    margin: 0,
-                    textAlign: "center",
-                  }}
-                >
-                  Next
-                </h4>
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  <h4
+                    style={{
+                      lineHeight: 1,
+                      fontWeight: 600,
+                      fontSize: "20px",
+                      margin: 0,
+                      textAlign: "center",
+                    }}
+                  >
+                    Next
+                  </h4>
+                )}
               </button>
             </form>
           </div>
