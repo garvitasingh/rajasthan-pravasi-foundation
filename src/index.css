@@ -163,3 +163,9 @@
 .slick-track {
   display: flex;
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

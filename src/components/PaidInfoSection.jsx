@@ -1,46 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Crown, Shield, Zap, Gift, TrendingUp, Award, Star } from "lucide-react";
-
 import tree from "../assets/tree_bg.png";
 import doc from "../assets/doc.png";
+import { getPaidBenefits } from "../api/paidSectionApi";
 
-const successStories = [
-  {
-    name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
-    address: "22, Dr. APJ Abdul Kalam Road",
-    description:
-      "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-    color: "#EDA536",
-    icon: Shield,
-  },
-  {
-    name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
-    address: "22, Dr. APJ Abdul Kalam Road",
-    description:
-      "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-    color: "#BA5C9E",
-    icon: Gift,
-  },
-  {
-    name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
-    address: "22, Dr. APJ Abdul Kalam Road",
-    description:
-      "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-    color: "#41C45C",
-    icon: TrendingUp,
-  },
-  {
-    name: "CLAIM YOUR POLICY OF INR 5 LAKHS",
-    address: "22, Dr. APJ Abdul Kalam Road",
-    description:
-      "Color theory influences user emotions and brand perception. Data visualization helps users understand complex information. Design thinking fosters innovation through",
-    color: "#EA2774",
-    icon: Award,
-  },
-];
+const iconList = [Shield, Gift, TrendingUp, Award];
+const colorList = ["#EDA536", "#BA5C9E", "#41C45C", "#EA2774"];
 
 export default function PaidInfoSection() {
+  const [benefits, setBenefits] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBenefits = async () => {
+      try {
+        const result = await getPaidBenefits();
+        if (result.success && Array.isArray(result.data)) {
+          setBenefits(result.data);
+        } else {
+          setBenefits([]);
+        }
+      } catch (err) {
+        setError("Failed to load benefits. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBenefits();
+  }, []);
+
   return (
     <section className="w-full relative overflow-hidden bg-gradient-to-br from-gray-50 via-orange-50 to-pink-50 py-20">
       {/* Animated Background Elements */}
@@ -166,111 +156,119 @@ export default function PaidInfoSection() {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {successStories.map((story, idx) => {
-            const IconComponent = story.icon;
-            
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group relative"
-              >
-                {/* Card Glow */}
+          {loading ? (
+            <div className="col-span-full text-center text-gray-700 py-8">Loading benefits...</div>
+          ) : error ? (
+            <div className="col-span-full text-center text-red-500 py-8">{error}</div>
+          ) : benefits.length === 0 ? (
+            <div className="col-span-full text-center text-gray-700 py-8">No benefits available.</div>
+          ) : (
+            benefits.map((benefit, idx) => {
+              const IconComponent = iconList[idx % iconList.length];
+              const color = colorList[idx % colorList.length];
+              return (
                 <motion.div
-                  className="absolute -inset-1 rounded-[32px] opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
-                  style={{
-                    background: `linear-gradient(135deg, ${story.color}, ${story.color}80)`,
-                  }}
-                />
-
-                {/* Card */}
-                <div
-                  className="relative h-full flex flex-col overflow-hidden shadow-xl"
-                  style={{
-                    borderTopLeftRadius: "2px",
-                    borderTopRightRadius: "30px",
-                    borderBottomLeftRadius: "30px",
-                    borderBottomRightRadius: "2px",
-                    background: story.color,
-                  }}
+                  key={benefit._id || idx}
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group relative"
                 >
-                  {/* Shine Effect */}
+                  {/* Card Glow */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"
-                    animate={{
-                      x: ["-100%", "100%"],
-                      opacity: [0, 0.5, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 2,
+                    className="absolute -inset-1 rounded-[32px] opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
+                    style={{
+                      background: `linear-gradient(135deg, ${color}, ${color}80)`,
                     }}
                   />
 
-                  {/* Decorative circles */}
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                  <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
-
-                  <div className="relative p-6 flex flex-col h-full">
-                    {/* Icon Badge */}
+                  {/* Card */}
+                  <div
+                    className="relative h-full flex flex-col overflow-hidden shadow-xl"
+                    style={{
+                      borderTopLeftRadius: "2px",
+                      borderTopRightRadius: "30px",
+                      borderBottomLeftRadius: "30px",
+                      borderBottomRightRadius: "2px",
+                      background: color,
+                    }}
+                  >
+                    {/* Shine Effect */}
                     <motion.div
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                      className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 shadow-lg"
-                    >
-                      <IconComponent className="w-8 h-8 text-white" />
-                    </motion.div>
+                      className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"
+                      animate={{
+                        x: ["-100%", "100%"],
+                        opacity: [0, 0.5, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: 2,
+                      }}
+                    />
 
-                    {/* Profile Image */}
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="relative w-20 h-20 rounded-xl overflow-hidden mb-4 shadow-lg"
-                    >
-                      <img 
-                        src={doc}
-                        alt={story.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                    </motion.div>
+                    {/* Decorative circles */}
+                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
 
-                    {/* Title */}
-                    <h3 className="text-white font-black text-lg mb-3 leading-tight">
-                      {story.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-white/90 text-sm leading-relaxed flex-1">
-                      {story.description}
-                    </p>
-
-                    {/* Hover Arrow */}
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      whileHover={{ opacity: 1, x: 0 }}
-                      className="mt-4 flex items-center gap-2 text-white font-bold text-sm"
-                    >
-                      <span>Learn More</span>
-                      <motion.span
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
+                    <div className="relative p-6 flex flex-col h-full">
+                      {/* Icon Badge */}
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                        className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 shadow-lg"
                       >
-                        →
-                      </motion.span>
-                    </motion.div>
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </motion.div>
 
-                    {/* Corner Accent */}
-                    <div className="absolute bottom-0 right-0 w-20 h-20 bg-white/5 rounded-tl-3xl" />
+                      {/* Profile Image */}
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        className="relative w-20 h-20 rounded-xl overflow-hidden mb-4 shadow-lg"
+                      >
+                        <img 
+                          src={doc}
+                          alt={benefit.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                      </motion.div>
+
+                      {/* Title */}
+                      <h3 className="text-white font-black text-lg mb-3 leading-tight">
+                        {benefit.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-white/90 text-sm leading-relaxed flex-1">
+                        {benefit.subtitle}
+                      </p>
+
+                      {/* Hover Arrow */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        whileHover={{ opacity: 1, x: 0 }}
+                        className="mt-4 flex items-center gap-2 text-white font-bold text-sm"
+                      >
+                        <span>Learn More</span>
+                        <motion.span
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          →
+                        </motion.span>
+                      </motion.div>
+
+                      {/* Corner Accent */}
+                      <div className="absolute bottom-0 right-0 w-20 h-20 bg-white/5 rounded-tl-3xl" />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
+                </motion.div>
+              );
+            })
+          )}
         </div>
 
         {/* Bottom CTA */}

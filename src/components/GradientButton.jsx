@@ -1,11 +1,6 @@
 import React from "react";
 
-/**
- * GradientButton.jsx
- * - Reusable gradient button that uses the exact gradient you provided.
- * - Can take custom dimensions, border radius, and extra styling via props.
- * - Keeps gradient style consistent across usages.
- */
+ 
 export default function GradientButton({
   children,
   className = "",
